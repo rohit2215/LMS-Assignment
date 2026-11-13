@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Edutech | Emeritus</title>
+    <style>
+        :root {
+            --emeritus-green: #00875a;
+            --emeritus-green-hover: #006c48;
+            --emeritus-green-light: #e6f4ea;
+            --emeritus-green-subtle: #f0fdf4;
+            --dark-heading: #111827;
+            --body-text: #374151;
+            --muted-text: #6b7280;
+            --border-light: #e5e7eb;
+            --bg-white: #ffffff;
+            --bg-alt: #f9fafb;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--body-text);
+            background-color: var(--bg-white);
+            line-height: 1.6;
+        }
+
+        /* Top Announcement Strip */
+        .top-strip {
+            width: 100%;
+            background-color: var(--emeritus-green);
+            color: #ffffff;
+            text-align: center;
+            padding: 0.65rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .top-strip a {
+            color: #ffffff;
+            font-weight: 700;
+            text-decoration: underline;
+            margin-left: 0.35rem;
+        }
+
+        /* Full Width Navigation Header */
+        .site-nav {
+            width: 100%;
+            background-color: var(--bg-white);
+            border-bottom: 1px solid var(--border-light);
+            padding: 1.1rem 3rem;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .nav-wrapper {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 2rem;
+        }
+
+        .brand-area {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            text-decoration: none;
+            color: var(--dark-heading);
+        }
+
+        .brand-badge {
+            width: 36px;
+            height: 36px;
+            border: 2.5px solid var(--emeritus-green);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.35rem;
+            color: var(--emeritus-green);
+        }
+
+        .brand-name {
+            font-size: 1.45rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--dark-heading);
+        }
+
+        .search-bar {
+            flex: 1;
+            max-width: 460px;
+            position: relative;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 0.6rem 1rem 0.6rem 2.5rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.925rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-bar input:focus {
+            border-color: var(--emeritus-green);
+        }
+
+        .search-bar svg {
+            position: absolute;
+            left: 0.75rem;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            color: var(--muted-text);
+        }
+
+        .menu-items {
+            display: flex;
+            align-items: center;
+            gap: 1.75rem;
+            list-style: none;
+        }
+
+        .menu-items a {
+            text-decoration: none;
+            color: var(--dark-heading);
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: color 0.15s;
+        }
+
+        .menu-items a:hover {
+            color: var(--emeritus-green);
+        }
+
+        .login-btn {
+            border: 1px solid #d1d5db;
+            padding: 0.45rem 1.4rem;
+            border-radius: 6px;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--dark-heading);
+            transition: all 0.2s;
+        }
+
+        .login-btn:hover {
+            border-color: var(--emeritus-green);
+            color: var(--emeritus-green);
+        }
+
+        /* Hero Section (Edge-to-Edge) */
+        .hero-section {
+            width: 100%;
+            background-color: var(--bg-white);
+            padding: 4rem 3rem 5rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .hero-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2.5rem, 4.5vw, 4rem);
+            font-weight: 800;
+            line-height: 1.15;
+            color: var(--dark-heading);
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-content h1 span {
+            color: var(--emeritus-green);
+        }
+
+        .hero-content .lead-text {
+            font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+            color: var(--body-text);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            max-width: 90%;
+        }
+
+        .hero-cta-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background-color: var(--emeritus-green);
+            color: #ffffff;
+            padding: 0.9rem 2.2rem;
+            border-radius: 6px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background-color 0.2s, transform 0.15s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--emeritus-green-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--dark-heading);
+            padding: 0.9rem 2rem;
+            border-radius: 6px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1.5px solid var(--border-light);
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--dark-heading);
+        }
+
+        /* Hero Image Container with Emeritus Green Bracket Accent */
+        .hero-visual-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .corner-accent-top {
+            position: absolute;
+            top: -14px;
+            right: -14px;
+            width: 48px;
+            height: 48px;
+            border-top: 5px solid var(--emeritus-green);
+            border-right: 5px solid var(--emeritus-green);
+            z-index: 2;
+        }
+
+        .corner-accent-bottom {
+            position: absolute;
+            bottom: -14px;
+            left: -14px;
+            width: 48px;
+            height: 48px;
+            border-bottom: 5px solid var(--emeritus-green);
+            border-left: 5px solid var(--emeritus-green);
+            z-index: 2;
+        }
+
+        .hero-img {
+            width: 100%;
+            height: 420px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            display: block;
+        }
+
+        /* Benefits Section (Full Width) */
+        .benefits-section {
+            width: 100%;
+            padding: 5rem 3rem;
+            background-color: var(--bg-white);
+        }
+
+        .section-header {
+            max-width: 800px;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-tag {
+            color: var(--emeritus-green);
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .section-header h2 {
+            font-size: clamp(2rem, 3.5vw, 2.75rem);
+            font-weight: 800;
+            color: var(--dark-heading);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.85rem;
+        }
+
+        .section-header p {
+            font-size: 1.15rem;
+            color: var(--muted-text);
+            line-height: 1.7;
+        }
+
+        /* Benefits Grid across 100% width */
+        .benefits-grid {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .benefit-card {
+            background-color: #ffffff;
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 2.25rem 2rem;
+            transition: all 0.25s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .benefit-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--emeritus-green);
+            box-shadow: 0 14px 28px rgba(0, 135, 90, 0.08), 0 10px 10px rgba(0, 0, 0, 0.02);
+        }
+
+        .benefit-icon-box {
+            width: 48px;
+            height: 48px;
+            background-color: var(--emeritus-green-light);
+            color: var(--emeritus-green);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.35rem;
+            font-weight: 900;
+            margin-bottom: 1.35rem;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dark-heading);
+            margin-bottom: 0.75rem;
+            line-height: 1.35;
+        }
+
+        .benefit-card p {
+            font-size: 0.975rem;
+            color: var(--body-text);
+            line-height: 1.65;
+        }
+
+        /* Full Width Footer */
+        .site-footer {
+            width: 100%;
+            background-color: var(--dark-heading);
+            color: #d1d5db;
+            padding: 3.5rem 3rem 2rem;
+        }
+
+        .footer-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-brand h4 {
+            color: #ffffff;
+            font-size: 1.4rem;
+            font-weight: 800;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-brand p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #9ca3af;
+            max-width: 360px;
+        }
+
+        .footer-col h5 {
+            color: #ffffff;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 1.1rem;
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col li {
+            margin-bottom: 0.6rem;
+        }
+
+        .footer-col a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.15s;
+        }
+
+        .footer-col a:hover {
+            color: #ffffff;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.875rem;
+            color: #9ca3af;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 1100px) {
+            .benefits-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .footer-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 860px) {
+            .site-nav {
+                padding: 1rem 1.5rem;
+            }
+            .search-bar, .menu-items {
+                display: none;
+            }
+            .hero-section {
+                padding: 3rem 1.5rem;
+            }
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 2.5rem;
+            }
+            .hero-img {
+                height: 300px;
+            }
+            .benefits-section {
+                padding: 3.5rem 1.5rem;
+            }
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Announcement Bar -->
+    <aside class="top-strip" aria-label="Global Announcement">
+        Unlock new opportunities by upskilling and stepping into a brighter future.
+        <a href="#benefits">Explore Now!</a>
+    </aside>
+
+    <!-- Main Navigation Bar -->
+    <header class="site-nav" role="banner">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-area" aria-label="Emeritus Home">
+                <div class="brand-badge" aria-hidden="true">E</div>
+                <span class="brand-name">Emeritus</span>
+            </a>
+
+            <div class="search-bar" role="search">
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+                <input type="text" placeholder="What would you like to learn?" aria-label="Search courses and topics">
+            </div>
+
+            <nav aria-label="Primary Navigation">
+                <ul class="menu-items">
+                    <li><a href="#">Explore Institutes</a></li>
+                    <li><a href="#">Categories</a></li>
+                    <li><a href="#">Global Programs</a></li>
+                    <li><a href="#">Enterprise</a></li>
+                    <li><a href="#" class="login-btn">Login</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main role="main">
+        <!-- Hero Section: Heading & Paragraph explaining edutech -->
+        <section class="hero-section" aria-labelledby="hero-title">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1 id="hero-title">
+                        Welcome to <span>edutech</span>
+                    </h1>
+                    <p class="lead-text">
+                        <strong>Edutech (Educational Technology)</strong> is the systematic integration of cutting-edge technology, innovative pedagogical methods, and digital resources to enhance teaching and learning experiences. It transforms traditional classrooms into engaging, accessible, and data-driven learning environments that empower learners of all backgrounds to acquire knowledge anytime, anywhere.
+                    </p>
+                    <div class="hero-cta-group">
+                        <a href="#benefits" class="btn-primary">
+                            Explore Benefits
+                            <span aria-hidden="true">&rarr;</span>
+                        </a>
+                        <a href="#" class="btn-secondary">Browse Curriculum</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual-wrapper">
+                    <div class="corner-accent-top" aria-hidden="true"></div>
+                    <div class="corner-accent-bottom" aria-hidden="true"></div>
+                    <img 
+                        src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=1200&q=80" 
+                        alt="Students collaborating and learning actively with digital technology" 
+                        class="hero-img"
+                    >
+                </div>
+            </div>
+        </section>
+
+        <!-- List Explaining Benefits -->
+        <section id="benefits" class="benefits-section" aria-labelledby="benefits-heading">
+            <div class="section-header">
+                <span class="section-tag">Empowering Education</span>
+                <h2 id="benefits-heading">Key Benefits of Edutech</h2>
+                <p>
+                    Educational technology empowers modern learners, educators, and global institutions with tools built for lifelong success.
+                </p>
+            </div>
+
+            <ul class="benefits-grid" role="list">
+                <li class="benefit-card">
+                    <div class="benefit-icon-box" aria-hidden="true">&#10003;</div>
+                    <h3>Personalized Learning Pathways</h3>
+                    <p>
+                        Customizes learning pathways, difficulty levels, and instructional pacing to match each individual student's unique needs, strengths, and goals.
+                    </p>
+                </li>
+
+                <li class="benefit-card">
+                    <div class="benefit-icon-box" aria-hidden="true">&#10003;</div>
+                    <h3>Universal Accessibility &amp; Flexibility</h3>
+                    <p>
+                        Enables asynchronous and synchronous 24/7 access to high-quality coursework, lectures, and resources across all devices globally.
+                    </p>
+                </li>
+
+                <li class="benefit-card">
+                    <div class="benefit-icon-box" aria-hidden="true">&#10003;</div>
+                    <h3>Interactive &amp; Engaging Content</h3>
+                    <p>
+                        Transforms passive learning into an active experience using interactive simulations, gamified exercises, and real-world virtual labs.
+                    </p>
+                </li>
+
+                <li class="benefit-card">
+                    <div class="benefit-icon-box" aria-hidden="true">&#10003;</div>
+                    <h3>Real-Time Analytics &amp; Tracking</h3>
+                    <p>
+                        Provides educators and institutions with actionable data insights to track student engagement, identify learning gaps, and intervene promptly.
+                    </p>
+                </li>
+
+                <li class="benefit-card">
+                    <div class="benefit-icon-box" aria-hidden="true">&#10003;</div>
+                    <h3>Collaborative Global Learning</h3>
+                    <p>
+                        Connects diverse global cohorts of peers, mentors, and faculty through discussion forums, peer reviews, and collaborative team workspaces.
+                    </p>
+                </li>
+
+                <li class="benefit-card">
+                    <div class="benefit-icon-box" aria-hidden="true">&#10003;</div>
+                    <h3>Cost-Effectiveness &amp; Scalability</h3>
+                    <p>
+                        Reduces instructional delivery and physical infrastructure costs while enabling institutions to deliver world-class education at scale.
+                    </p>
+                </li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <h4>EMERITUS</h4>
+                <p>
+                    Emeritus makes world-class education accessible and affordable to individuals and organizations across the globe.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h5>Programs</h5>
+                <ul>
+                    <li><a href="#">Leadership &amp; Management</a></li>
+                    <li><a href="#">Technology &amp; AI</a></li>
+                    <li><a href="#">Data Science &amp; Analytics</a></li>
+                    <li><a href="#">Digital Marketing</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Institutes</h5>
+                <ul>
+                    <li><a href="#">MIT Professional Education</a></li>
+                    <li><a href="#">Kellogg Executive Education</a></li>
+                    <li><a href="#">Columbia Business School</a></li>
+                    <li><a href="#">Cambridge Judge</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h5>Accessibility &amp; Support</h5>
+                <ul>
+                    <li><a href="#">Accessibility Statement</a></li>
+                    <li><a href="#">LMS Help Center</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Emeritus Edutech. All rights reserved.</p>
+            <p>Built with accessible, semantic HTML5 &amp; CSS3</p>
+        </div>
+    </footer>
+</body>
+</html>
