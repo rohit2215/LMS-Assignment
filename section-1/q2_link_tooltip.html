@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check OpenAI Link with Tooltip</title>
+    <style>
+        :root {
+            --emeritus-green: #00875a;
+            --emeritus-green-hover: #006c48;
+            --emeritus-green-light: #e6f4ea;
+            --dark-heading: #111827;
+            --body-text: #374151;
+            --muted-text: #6b7280;
+            --border-light: #e5e7eb;
+            --bg-white: #ffffff;
+            --bg-canvas: #f8fafc;
+            --tooltip-bg: #1f2937;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--body-text);
+            background-color: var(--bg-canvas);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Announcement Strip */
+        .top-strip {
+            width: 100%;
+            background-color: var(--emeritus-green);
+            color: #ffffff;
+            text-align: center;
+            padding: 0.65rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Full Width Header */
+        .site-nav {
+            width: 100%;
+            background-color: var(--bg-white);
+            border-bottom: 1px solid var(--border-light);
+            padding: 1.1rem 3rem;
+        }
+
+        .nav-wrapper {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-area {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            text-decoration: none;
+            color: var(--dark-heading);
+        }
+
+        .brand-badge {
+            width: 36px;
+            height: 36px;
+            border: 2.5px solid var(--emeritus-green);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.35rem;
+            color: var(--emeritus-green);
+        }
+
+        .brand-name {
+            font-size: 1.45rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--dark-heading);
+        }
+
+        /* Main Full Width Content */
+        .page-content {
+            flex: 1;
+            width: 100%;
+            padding: 4rem 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .intro-block {
+            max-width: 900px;
+        }
+
+        .intro-block h1 {
+            font-size: clamp(2rem, 3.5vw, 2.75rem);
+            font-weight: 800;
+            color: var(--dark-heading);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .intro-block p {
+            font-size: 1.15rem;
+            color: var(--muted-text);
+        }
+
+        /* Interactive Showcase Grid */
+        .showcase-grid {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: stretch;
+        }
+
+        .card-panel {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-panel h2 {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--dark-heading);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .card-panel h2::before {
+            content: "";
+            width: 4px;
+            height: 20px;
+            background-color: var(--emeritus-green);
+            border-radius: 2px;
+        }
+
+        .preview-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 3rem 1.5rem;
+            background-color: var(--bg-canvas);
+            border: 1px dashed var(--border-light);
+            border-radius: 8px;
+            text-align: center;
+            gap: 1.5rem;
+        }
+
+        .preview-hint {
+            font-size: 0.9rem;
+            color: var(--muted-text);
+        }
+
+        /* Custom Interactive Tooltip & Link */
+        .tooltip-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .openai-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #ffffff;
+            background-color: var(--emeritus-green);
+            padding: 0.85rem 1.75rem;
+            border-radius: 8px;
+            font-size: 1.15rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 10px rgba(0, 135, 90, 0.2);
+        }
+
+        .openai-link:hover,
+        .openai-link:focus-visible {
+            background-color: var(--emeritus-green-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0, 135, 90, 0.28);
+            outline: none;
+        }
+
+        .external-icon {
+            width: 18px;
+            height: 18px;
+            stroke-width: 2.2;
+        }
+
+        /* Tooltip Bubble */
+        .tooltip-bubble {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            bottom: calc(100% + 12px);
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+            background-color: var(--tooltip-bg);
+            color: #ffffff;
+            text-align: center;
+            padding: 0.55rem 1rem;
+            border-radius: 6px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            white-space: nowrap;
+            z-index: 20;
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
+            pointer-events: none;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Tooltip Arrow */
+        .tooltip-bubble::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -6px;
+            border-width: 6px;
+            border-style: solid;
+            border-color: var(--tooltip-bg) transparent transparent transparent;
+        }
+
+        /* Hover / Focus Trigger */
+        .tooltip-container:hover .tooltip-bubble,
+        .openai-link:focus + .tooltip-bubble {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Code Block Display */
+        .code-container {
+            flex: 1;
+            background-color: #0f172a;
+            color: #f8fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            overflow-x: auto;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            border: 1px solid #1e293b;
+        }
+
+        .code-keyword { color: #f472b6; }
+        .code-tag { color: #38bdf8; }
+        .code-attr { color: #a3e635; }
+        .code-val { color: #fde047; }
+        .code-comment { color: #94a3b8; font-style: italic; }
+
+        /* Feature Details List */
+        .specs-list {
+            list-style: none;
+            margin-top: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .specs-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.95rem;
+            color: var(--body-text);
+        }
+
+        .check-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--emeritus-green-light);
+            color: var(--emeritus-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+
+        /* Global Footer */
+        .site-footer {
+            width: 100%;
+            background-color: var(--dark-heading);
+            color: #9ca3af;
+            padding: 2rem 3rem;
+            margin-top: auto;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 900px) {
+            .site-nav, .page-content, .site-footer {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+            .showcase-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Announcement Strip -->
+    <aside class="top-strip" aria-label="Global Banner">
+        Emeritus Learning Systems &bull; HTML Hyperlink &amp; Tooltip Implementation
+    </aside>
+
+    <!-- Navigation Header -->
+    <header class="site-nav" role="banner">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-area" aria-label="Emeritus Home">
+                <div class="brand-badge" aria-hidden="true">E</div>
+                <span class="brand-name">Emeritus</span>
+            </a>
+            <span style="font-size: 0.95rem; font-weight: 600; color: var(--muted-text);">
+                Hyperlink &amp; Interactive Tooltip
+            </span>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="page-content" role="main">
+        <div class="intro-block">
+            <h1>External Link with Hover Tooltip</h1>
+            <p>
+                Demonstrating secure external tab navigation using <code>target="_blank"</code> with <code>rel="noopener noreferrer"</code>, accompanied by accessible hover and focus tooltips.
+            </p>
+        </div>
+
+        <section class="showcase-grid" aria-label="Link Demonstration and Source Code">
+            <!-- Left: Interactive Live Preview -->
+            <div class="card-panel">
+                <h2>Interactive Live Preview</h2>
+                <div class="preview-area">
+                    <p class="preview-hint">Hover over or focus on the link below to inspect the tooltip:</p>
+
+                    <!-- Target Link with Tooltip -->
+                    <div class="tooltip-container">
+                        <a 
+                            href="https://openai.com/" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            title="Visit OpenAI website" 
+                            class="openai-link"
+                            aria-describedby="openai-tooltip"
+                        >
+                            <span>Check OpenAI</span>
+                            <svg class="external-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                            </svg>
+                        </a>
+                        <span id="openai-tooltip" class="tooltip-bubble" role="tooltip">
+                            Visit OpenAI website
+                        </span>
+                    </div>
+
+                    <p style="font-size: 0.85rem; color: var(--muted-text);">
+                        Opens <strong>https://openai.com/</strong> in a new browser tab.
+                    </p>
+                </div>
+
+                <ul class="specs-list">
+                    <li>
+                        <span class="check-icon">&#10003;</span>
+                        <span><strong>target="_blank":</strong> Safely opens the destination page in a new browser tab.</span>
+                    </li>
+                    <li>
+                        <span class="check-icon">&#10003;</span>
+                        <span><strong>title="Visit OpenAI website":</strong> Standard native HTML tooltip on hover.</span>
+                    </li>
+                    <li>
+                        <span class="check-icon">&#10003;</span>
+                        <span><strong>rel="noopener noreferrer":</strong> Security protection against tab-napping / window.opener exploits.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Right: Exact HTML Code Snippet -->
+            <div class="card-panel">
+                <h2>HTML Snippet</h2>
+                <div class="code-container">
+<span class="code-comment">&lt;!-- Question 2: Link with tooltip opening in new tab --&gt;</span>
+
+<span class="code-tag">&lt;a</span> 
+    <span class="code-attr">href</span>=<span class="code-val">"https://openai.com/"</span> 
+    <span class="code-attr">target</span>=<span class="code-val">"_blank"</span> 
+    <span class="code-attr">rel</span>=<span class="code-val">"noopener noreferrer"</span> 
+    <span class="code-attr">title</span>=<span class="code-val">"Visit OpenAI website"</span><span class="code-tag">&gt;</span>
+    Check OpenAI
+<span class="code-tag">&lt;/a&gt;</span>
+                </div>
+
+                <ul class="specs-list">
+                    <li>
+                        <span class="check-icon">&#10003;</span>
+                        <span><strong>Native &amp; Custom Tooltip:</strong> Includes both HTML native <code>title</code> and CSS enhanced bubble.</span>
+                    </li>
+                    <li>
+                        <span class="check-icon">&#10003;</span>
+                        <span><strong>Keyboard Accessible:</strong> Tooltip appears on both mouse hover and keyboard focus (<code>:focus-visible</code>).</span>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-inner">
+            <p>&copy; 2026 Emeritus Edutech Platform &bull; Submission by Rohit Srivastava</p>
+            <p>Built with Accessible Semantic HTML5 &amp; CSS3</p>
+        </div>
+    </footer>
+</body>
+</html>
