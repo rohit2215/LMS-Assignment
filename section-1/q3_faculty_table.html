@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Details Table | Emeritus</title>
+    <style>
+        :root {
+            --emeritus-green: #00875a;
+            --emeritus-green-hover: #006c48;
+            --emeritus-green-light: #e6f4ea;
+            --dark-heading: #111827;
+            --body-text: #374151;
+            --muted-text: #6b7280;
+            --border-light: #e5e7eb;
+            --bg-white: #ffffff;
+            --bg-canvas: #f8fafc;
+            --row-alt: #fcfdfe;
+            --row-hover: #f0fdf4;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--body-text);
+            background-color: var(--bg-canvas);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Announcement Strip */
+        .top-strip {
+            width: 100%;
+            background-color: var(--emeritus-green);
+            color: #ffffff;
+            text-align: center;
+            padding: 0.65rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Full Width Header */
+        .site-nav {
+            width: 100%;
+            background-color: var(--bg-white);
+            border-bottom: 1px solid var(--border-light);
+            padding: 1.1rem 3rem;
+        }
+
+        .nav-wrapper {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-area {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            text-decoration: none;
+            color: var(--dark-heading);
+        }
+
+        .brand-badge {
+            width: 36px;
+            height: 36px;
+            border: 2.5px solid var(--emeritus-green);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.35rem;
+            color: var(--emeritus-green);
+        }
+
+        .brand-name {
+            font-size: 1.45rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--dark-heading);
+        }
+
+        /* Main Content Container */
+        .page-content {
+            flex: 1;
+            width: 100%;
+            padding: 4rem 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+
+        .intro-header {
+            max-width: 900px;
+        }
+
+        .intro-header h1 {
+            font-size: clamp(2rem, 3.5vw, 2.75rem);
+            font-weight: 800;
+            color: var(--dark-heading);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .intro-header p {
+            font-size: 1.15rem;
+            color: var(--muted-text);
+        }
+
+        /* Table Card Container */
+        .table-container {
+            width: 100%;
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            overflow-x: auto;
+            padding: 1.5rem;
+        }
+
+        /* Accessible Semantic Table */
+        .faculty-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            min-width: 800px;
+        }
+
+        .faculty-table caption {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--dark-heading);
+            text-align: left;
+            padding: 1rem 0.5rem 1.25rem;
+            caption-side: top;
+        }
+
+        .faculty-table thead th {
+            background-color: #f8fafc;
+            color: var(--dark-heading);
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 1.1rem 1.25rem;
+            border-bottom: 2px solid var(--border-light);
+            border-top: 1px solid var(--border-light);
+        }
+
+        .faculty-table tbody tr {
+            border-bottom: 1px solid var(--border-light);
+            transition: background-color 0.2s ease;
+        }
+
+        .faculty-table tbody tr:nth-child(even) {
+            background-color: var(--row-alt);
+        }
+
+        .faculty-table tbody tr:hover {
+            background-color: var(--row-hover);
+        }
+
+        .faculty-table td {
+            padding: 1.25rem 1.25rem;
+            vertical-align: middle;
+            font-size: 0.975rem;
+            color: var(--body-text);
+        }
+
+        /* Faculty Name & Badge */
+        .faculty-name {
+            font-weight: 700;
+            color: var(--dark-heading);
+            font-size: 1.05rem;
+        }
+
+        /* Faculty Photo */
+        .photo-wrapper {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--emeritus-green);
+            background-color: var(--emeritus-green-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+        }
+
+        .photo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Designation Badge */
+        .designation-badge {
+            display: inline-block;
+            background-color: var(--emeritus-green-light);
+            color: var(--emeritus-green);
+            font-weight: 600;
+            font-size: 0.875rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 6px;
+            border: 1px solid rgba(0, 135, 90, 0.2);
+        }
+
+        /* Other Details List */
+        .details-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+            font-size: 0.9rem;
+        }
+
+        .details-list li {
+            color: var(--muted-text);
+        }
+
+        .details-list strong {
+            color: var(--body-text);
+        }
+
+        /* Global Footer */
+        .site-footer {
+            width: 100%;
+            background-color: var(--dark-heading);
+            color: #9ca3af;
+            padding: 2rem 3rem;
+            margin-top: auto;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 860px) {
+            .site-nav, .page-content, .site-footer {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Announcement Strip -->
+    <aside class="top-strip" aria-label="Global Banner">
+        Emeritus Learning Systems &bull; Faculty Directory &amp; Course Leaders
+    </aside>
+
+    <!-- Navigation Header -->
+    <header class="site-nav" role="banner">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-area" aria-label="Emeritus Home">
+                <div class="brand-badge" aria-hidden="true">E</div>
+                <span class="brand-name">Emeritus</span>
+            </a>
+            <span style="font-size: 0.95rem; font-weight: 600; color: var(--muted-text);">
+                Academic Leadership &bull; Faculty Directory
+            </span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="page-content" role="main">
+        <div class="intro-header">
+            <h1>Emeritus Faculty Directory</h1>
+            <p>
+                Meet our distinguished academic mentors and world-renowned professors leading executive education programs.
+            </p>
+        </div>
+
+        <section class="table-container" aria-label="Faculty Details Directory">
+            <!-- Accessible Semantic HTML Table -->
+            <table class="faculty-table" aria-describedby="faculty-caption">
+                <caption id="faculty-caption">Faculty details</caption>
+                <thead>
+                    <tr>
+                        <th scope="col">Faculty Name</th>
+                        <th scope="col">Faculty Photo</th>
+                        <th scope="col">Faculty Designation</th>
+                        <th scope="col">Other Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Row 1 -->
+                    <tr>
+                        <td>
+                            <span class="faculty-name">Dr. Eleanor Vance</span>
+                        </td>
+                        <td>
+                            <div class="photo-wrapper">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80" 
+                                    alt="Portrait of Dr. Eleanor Vance" 
+                                    width="56" 
+                                    height="56"
+                                    loading="lazy"
+                                >
+                            </div>
+                        </td>
+                        <td>
+                            <span class="designation-badge">Senior Professor of AI &amp; Robotics</span>
+                        </td>
+                        <td>
+                            <ul class="details-list">
+                                <li><strong>Affiliation:</strong> Stanford University &amp; Emeritus</li>
+                                <li><strong>Research:</strong> Autonomous Systems &amp; Neural Nets</li>
+                                <li><strong>Email:</strong> eleanor.vance@emeritus.org</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                    <!-- Row 2 -->
+                    <tr>
+                        <td>
+                            <span class="faculty-name">Prof. Rajesh Kumar</span>
+                        </td>
+                        <td>
+                            <div class="photo-wrapper">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80" 
+                                    alt="Portrait of Prof. Rajesh Kumar" 
+                                    width="56" 
+                                    height="56"
+                                    loading="lazy"
+                                >
+                            </div>
+                        </td>
+                        <td>
+                            <span class="designation-badge">Chair of Data Science &amp; Analytics</span>
+                        </td>
+                        <td>
+                            <ul class="details-list">
+                                <li><strong>Affiliation:</strong> Indian School of Business (ISB)</li>
+                                <li><strong>Research:</strong> Predictive Modeling &amp; Big Data</li>
+                                <li><strong>Email:</strong> rajesh.kumar@emeritus.org</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                    <!-- Row 3 -->
+                    <tr>
+                        <td>
+                            <span class="faculty-name">Dr. Sarah Jenkins</span>
+                        </td>
+                        <td>
+                            <div class="photo-wrapper">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=150&q=80" 
+                                    alt="Portrait of Dr. Sarah Jenkins" 
+                                    width="56" 
+                                    height="56"
+                                    loading="lazy"
+                                >
+                            </div>
+                        </td>
+                        <td>
+                            <span class="designation-badge">Associate Dean of Executive Education</span>
+                        </td>
+                        <td>
+                            <ul class="details-list">
+                                <li><strong>Affiliation:</strong> Kellogg School of Management</li>
+                                <li><strong>Research:</strong> Global Leadership &amp; Strategic Innovation</li>
+                                <li><strong>Email:</strong> sarah.jenkins@emeritus.org</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+                    <!-- Row 4 -->
+                    <tr>
+                        <td>
+                            <span class="faculty-name">Prof. Marcus Thorne</span>
+                        </td>
+                        <td>
+                            <div class="photo-wrapper">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80" 
+                                    alt="Portrait of Prof. Marcus Thorne" 
+                                    width="56" 
+                                    height="56"
+                                    loading="lazy"
+                                >
+                            </div>
+                        </td>
+                        <td>
+                            <span class="designation-badge">Professor of Cloud Computing</span>
+                        </td>
+                        <td>
+                            <ul class="details-list">
+                                <li><strong>Affiliation:</strong> MIT Professional Education &amp; Emeritus</li>
+                                <li><strong>Research:</strong> Distributed Cloud Systems &amp; DevOps</li>
+                                <li><strong>Email:</strong> marcus.thorne@emeritus.org</li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-inner">
+            <p>&copy; 2026 Emeritus Edutech Platform &bull; Submission by Rohit Srivastava</p>
+            <p>Built with Accessible Semantic HTML5 &amp; CSS3</p>
+        </div>
+    </footer>
+</body>
+</html>
