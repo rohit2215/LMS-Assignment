@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Curriculum Accordion | Emeritus</title>
+    <style>
+        :root {
+            --emeritus-green: #00875a;
+            --emeritus-green-hover: #006c48;
+            --emeritus-green-light: #e6f4ea;
+            --dark-heading: #111827;
+            --body-text: #374151;
+            --muted-text: #6b7280;
+            --border-light: #e5e7eb;
+            --bg-white: #ffffff;
+            --bg-canvas: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--body-text);
+            background-color: var(--bg-canvas);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Announcement Strip */
+        .top-strip {
+            width: 100%;
+            background-color: var(--emeritus-green);
+            color: #ffffff;
+            text-align: center;
+            padding: 0.65rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Full Width Header */
+        .site-nav {
+            width: 100%;
+            background-color: var(--bg-white);
+            border-bottom: 1px solid var(--border-light);
+            padding: 1.1rem 3rem;
+        }
+
+        .nav-wrapper {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-area {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            text-decoration: none;
+            color: var(--dark-heading);
+        }
+
+        .brand-badge {
+            width: 36px;
+            height: 36px;
+            border: 2.5px solid var(--emeritus-green);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.35rem;
+            color: var(--emeritus-green);
+        }
+
+        .brand-name {
+            font-size: 1.45rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--dark-heading);
+        }
+
+        .nav-tag {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--muted-text);
+        }
+
+        /* Main Content Container */
+        .page-content {
+            flex: 1;
+            width: 100%;
+            padding: 4rem 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .intro-header {
+            max-width: 800px;
+        }
+
+        .intro-header h1 {
+            font-size: clamp(2rem, 3.5vw, 2.75rem);
+            font-weight: 800;
+            color: var(--dark-heading);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .intro-header p {
+            font-size: 1.15rem;
+            color: var(--muted-text);
+        }
+
+        /* Accordion Container */
+        .accordion-wrapper {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* Accordion Details Element */
+        .accordion-item {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .accordion-item:hover {
+            border-color: #cbd5e1;
+        }
+
+        /* Native Summary (Removes default disclosure triangle) */
+        .accordion-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 2rem;
+            background-color: var(--bg-white);
+            color: var(--dark-heading);
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            user-select: none;
+            list-style: none;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .accordion-header::-webkit-details-marker {
+            display: none;
+        }
+
+        .accordion-header:hover {
+            background-color: #fbfcfd;
+            color: var(--emeritus-green);
+        }
+
+        .title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: #f1f5f9;
+            color: var(--muted-text);
+            font-size: 0.95rem;
+            font-weight: 700;
+            transition: background-color 0.2s, color 0.2s;
+            flex-shrink: 0;
+        }
+
+        /* Custom Chevron Icon */
+        .accordion-icon {
+            width: 20px;
+            height: 20px;
+            color: var(--muted-text);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s;
+            flex-shrink: 0;
+        }
+
+        /* Collapsible Content Area */
+        .accordion-content {
+            padding: 1.75rem 2rem 2rem;
+            background-color: #fafbfc;
+            color: var(--body-text);
+            font-size: 1.025rem;
+            line-height: 1.7;
+            border-top: 1px solid var(--border-light);
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-6px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .accordion-content p {
+            margin-bottom: 1rem;
+        }
+
+        .accordion-content ul {
+            list-style: none;
+            padding-left: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            margin-top: 0.5rem;
+        }
+
+        .accordion-content li {
+            position: relative;
+            padding-left: 1.5rem;
+            color: var(--body-text);
+        }
+
+        .accordion-content li::before {
+            content: "•";
+            position: absolute;
+            left: 0.25rem;
+            color: var(--emeritus-green);
+            font-size: 1.4rem;
+            line-height: 1;
+        }
+
+        /* ACTIVE / OPEN STATE */
+        .accordion-item[open] > .accordion-header {
+            background-color: var(--emeritus-green-light);
+            color: var(--emeritus-green);
+        }
+
+        .accordion-item[open] > .accordion-header .section-number {
+            background-color: var(--emeritus-green);
+            color: #ffffff;
+        }
+
+        .accordion-item[open] > .accordion-header .accordion-icon {
+            transform: rotate(180deg);
+            color: var(--emeritus-green);
+        }
+
+        /* Focus outline for keyboard navigation */
+        .accordion-header:focus-visible {
+            outline: 2px solid var(--emeritus-green);
+            outline-offset: -2px;
+        }
+
+        /* Global Footer */
+        .site-footer {
+            width: 100%;
+            background-color: var(--dark-heading);
+            color: #9ca3af;
+            padding: 2rem 3rem;
+            margin-top: auto;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 860px) {
+            .site-nav, .page-content, .site-footer {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+            .accordion-header {
+                padding: 1.25rem 1.25rem;
+                font-size: 1.05rem;
+            }
+            .accordion-content {
+                padding: 1.25rem 1.25rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Announcement Strip -->
+    <aside class="top-strip" aria-label="Global Banner">
+        Emeritus Executive Learning &bull; Program Curriculum &amp; Structure
+    </aside>
+
+    <!-- Navigation Header -->
+    <header class="site-nav" role="banner">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-area" aria-label="Emeritus Home">
+                <div class="brand-badge" aria-hidden="true">E</div>
+                <span class="brand-name">Emeritus</span>
+            </a>
+            <span class="nav-tag">Interactive Accordion Component</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="page-content" role="main">
+        <div class="intro-header">
+            <h1>Program Structure &amp; Learning Modules</h1>
+            <p>
+                Click any section header below to expand its curriculum details. Clicking it again will collapse it, and clicking another section will automatically close all other sections.
+            </p>
+        </div>
+
+        <!-- Question 4: Accordion containing 3 sections, mutual exclusion + toggle on repeated click, accessible -->
+        <div class="accordion-wrapper" role="region" aria-label="Course Curriculum Accordion">
+            
+            <!-- Section 1 -->
+            <details name="curriculum-accordion" class="accordion-item" open>
+                <summary class="accordion-header">
+                    <div class="title-wrap">
+                        <span class="section-number">01</span>
+                        <span>Foundations of Educational Technology &amp; LMS Systems</span>
+                    </div>
+                    <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </summary>
+                <div class="accordion-content">
+                    <p>
+                        Explore the historical evolution, architectural principles, and operational infrastructure of modern Learning Management Systems (LMS) such as Canvas, Moodle, and Blackboard.
+                    </p>
+                    <ul>
+                        <li>Core LMS standards: SCORM, xAPI (Tin Can), and LTI (Learning Tools Interoperability).</li>
+                        <li>Digital content authoring, course structuring, and multimedia integration workflows.</li>
+                        <li>Best practices in semantic HTML, CSS styling, and cross-platform responsive design.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- Section 2 -->
+            <details name="curriculum-accordion" class="accordion-item">
+                <summary class="accordion-header">
+                    <div class="title-wrap">
+                        <span class="section-number">02</span>
+                        <span>Pedagogical Design &amp; Digital Learning Accessibility</span>
+                    </div>
+                    <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </summary>
+                <div class="accordion-content">
+                    <p>
+                        Master universal design for learning (UDL) frameworks and implement WCAG 2.1 AA accessibility compliance across all digital course modules and interactive assessments.
+                    </p>
+                    <ul>
+                        <li>Screen reader compatibility, keyboard navigation, and semantic ARIA landmarks.</li>
+                        <li>High contrast color palettes, readable typography, and accessible data visualizations.</li>
+                        <li>Cognitive load reduction strategies and asynchronous learning engagement techniques.</li>
+                    </ul>
+                </div>
+            </details>
+
+            <!-- Section 3 -->
+            <details name="curriculum-accordion" class="accordion-item">
+                <summary class="accordion-header">
+                    <div class="title-wrap">
+                        <span class="section-number">03</span>
+                        <span>Learning Analytics &amp; Continuous Quality Assurance</span>
+                    </div>
+                    <svg class="accordion-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </summary>
+                <div class="accordion-content">
+                    <p>
+                        Harness data-driven evaluation pipelines to measure student retention, track milestone completion rates, and proactively identify learners needing additional academic support.
+                    </p>
+                    <ul>
+                        <li>Automated quiz evaluation, grading rubrics, and formative assessment analytics.</li>
+                        <li>Cohort progression tracking and real-time intervention dashboards.</li>
+                        <li>Course iteration protocols based on student feedback and metric thresholds.</li>
+                    </ul>
+                </div>
+            </details>
+
+        </div>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-inner">
+            <p>&copy; 2026 Emeritus Edutech Platform &bull; Submission by Rohit Srivastava</p>
+            <p>Built with Accessible Semantic HTML5 &amp; CSS3</p>
+        </div>
+    </footer>
+</body>
+</html>
