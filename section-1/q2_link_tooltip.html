@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Check OpenAI Link with Tooltip</title>
+    <title>Check OpenAI | Emeritus Learning Resources</title>
     <style>
         :root {
             --emeritus-green: #00875a;
@@ -43,6 +43,13 @@
             padding: 0.65rem 1.5rem;
             font-size: 0.875rem;
             font-weight: 500;
+        }
+
+        .top-strip a {
+            color: #ffffff;
+            font-weight: 700;
+            text-decoration: underline;
+            margin-left: 0.25rem;
         }
 
         /* Full Width Header */
@@ -89,115 +96,96 @@
             color: var(--dark-heading);
         }
 
-        /* Main Full Width Content */
+        .nav-tag {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--muted-text);
+        }
+
+        /* Main Content Container */
         .page-content {
             flex: 1;
             width: 100%;
             padding: 4rem 3rem;
             display: flex;
             flex-direction: column;
-            gap: 3rem;
+            align-items: center;
+            justify-content: center;
         }
 
-        .intro-block {
-            max-width: 900px;
+        .resource-card {
+            width: 100%;
+            max-width: 820px;
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+            padding: 3.5rem 3rem;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .intro-block h1 {
-            font-size: clamp(2rem, 3.5vw, 2.75rem);
+        .resource-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--emeritus-green-light);
+            color: var(--emeritus-green);
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            margin-bottom: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .resource-card h1 {
+            font-size: clamp(2rem, 3.5vw, 2.5rem);
             font-weight: 800;
             color: var(--dark-heading);
             letter-spacing: -0.02em;
-            margin-bottom: 0.75rem;
+            margin-bottom: 1rem;
+            line-height: 1.25;
         }
 
-        .intro-block p {
+        .resource-card p {
             font-size: 1.15rem;
             color: var(--muted-text);
+            max-width: 620px;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
         }
 
-        /* Interactive Showcase Grid */
-        .showcase-grid {
-            width: 100%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2.5rem;
-            align-items: stretch;
-        }
-
-        .card-panel {
-            background-color: var(--bg-white);
-            border: 1px solid var(--border-light);
-            border-radius: 12px;
-            padding: 2.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card-panel h2 {
-            font-size: 1.35rem;
-            font-weight: 700;
-            color: var(--dark-heading);
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-        }
-
-        .card-panel h2::before {
-            content: "";
-            width: 4px;
-            height: 20px;
-            background-color: var(--emeritus-green);
-            border-radius: 2px;
-        }
-
-        .preview-area {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 3rem 1.5rem;
-            background-color: var(--bg-canvas);
-            border: 1px dashed var(--border-light);
-            border-radius: 8px;
-            text-align: center;
-            gap: 1.5rem;
-        }
-
-        .preview-hint {
-            font-size: 0.9rem;
-            color: var(--muted-text);
-        }
-
-        /* Custom Interactive Tooltip & Link */
+        /* Tooltip Container */
         .tooltip-container {
             position: relative;
             display: inline-block;
         }
 
-        .openai-link {
+        /* Question 2: Link Button */
+        .openai-btn {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            color: #ffffff;
+            gap: 0.65rem;
             background-color: var(--emeritus-green);
-            padding: 0.85rem 1.75rem;
-            border-radius: 8px;
+            color: #ffffff;
             font-size: 1.15rem;
             font-weight: 700;
             text-decoration: none;
+            padding: 1rem 2.25rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 135, 90, 0.25);
             transition: all 0.25s ease;
-            box-shadow: 0 4px 10px rgba(0, 135, 90, 0.2);
         }
 
-        .openai-link:hover,
-        .openai-link:focus-visible {
+        .openai-btn:hover,
+        .openai-btn:focus-visible {
             background-color: var(--emeritus-green-hover);
             transform: translateY(-2px);
-            box-shadow: 0 8px 16px rgba(0, 135, 90, 0.28);
+            box-shadow: 0 8px 20px rgba(0, 135, 90, 0.35);
             outline: none;
         }
 
@@ -205,6 +193,11 @@
             width: 18px;
             height: 18px;
             stroke-width: 2.2;
+            transition: transform 0.2s ease;
+        }
+
+        .openai-btn:hover .external-icon {
+            transform: translate(2px, -2px);
         }
 
         /* Tooltip Bubble */
@@ -212,21 +205,20 @@
             visibility: hidden;
             opacity: 0;
             position: absolute;
-            bottom: calc(100% + 12px);
+            bottom: calc(100% + 14px);
             left: 50%;
-            transform: translateX(-50%) translateY(4px);
+            transform: translateX(-50%) translateY(6px);
             background-color: var(--tooltip-bg);
             color: #ffffff;
-            text-align: center;
+            font-size: 0.9rem;
+            font-weight: 600;
             padding: 0.55rem 1rem;
             border-radius: 6px;
-            font-size: 0.875rem;
-            font-weight: 600;
             white-space: nowrap;
-            z-index: 20;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
             transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s;
             pointer-events: none;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+            z-index: 100;
         }
 
         /* Tooltip Arrow */
@@ -241,63 +233,18 @@
             border-color: var(--tooltip-bg) transparent transparent transparent;
         }
 
-        /* Hover / Focus Trigger */
+        /* Hover & Focus State */
         .tooltip-container:hover .tooltip-bubble,
-        .openai-link:focus + .tooltip-bubble {
+        .openai-btn:focus + .tooltip-bubble {
             visibility: visible;
             opacity: 1;
             transform: translateX(-50%) translateY(0);
         }
 
-        /* Code Block Display */
-        .code-container {
-            flex: 1;
-            background-color: #0f172a;
-            color: #f8fafc;
-            border-radius: 8px;
-            padding: 1.5rem;
-            overflow-x: auto;
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            font-size: 0.95rem;
-            line-height: 1.7;
-            border: 1px solid #1e293b;
-        }
-
-        .code-keyword { color: #f472b6; }
-        .code-tag { color: #38bdf8; }
-        .code-attr { color: #a3e635; }
-        .code-val { color: #fde047; }
-        .code-comment { color: #94a3b8; font-style: italic; }
-
-        /* Feature Details List */
-        .specs-list {
-            list-style: none;
+        .note-text {
             margin-top: 1.5rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .specs-list li {
-            display: flex;
-            align-items: center;
-            gap: 0.6rem;
-            font-size: 0.95rem;
-            color: var(--body-text);
-        }
-
-        .check-icon {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: var(--emeritus-green-light);
-            color: var(--emeritus-green);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 0.8rem;
-            flex-shrink: 0;
+            font-size: 0.875rem;
+            color: var(--muted-text);
         }
 
         /* Global Footer */
@@ -319,13 +266,13 @@
             font-size: 0.9rem;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 768px) {
             .site-nav, .page-content, .site-footer {
                 padding-left: 1.5rem;
                 padding-right: 1.5rem;
             }
-            .showcase-grid {
-                grid-template-columns: 1fr;
+            .resource-card {
+                padding: 2.5rem 1.5rem;
             }
         }
     </style>
@@ -333,7 +280,7 @@
 <body>
     <!-- Top Announcement Strip -->
     <aside class="top-strip" aria-label="Global Banner">
-        Emeritus Learning Systems &bull; HTML Hyperlink &amp; Tooltip Implementation
+        Unlock new opportunities by upskilling and stepping into a brighter future. <a href="#">Explore Now!</a>
     </aside>
 
     <!-- Navigation Header -->
@@ -343,96 +290,43 @@
                 <div class="brand-badge" aria-hidden="true">E</div>
                 <span class="brand-name">Emeritus</span>
             </a>
-            <span style="font-size: 0.95rem; font-weight: 600; color: var(--muted-text);">
-                Hyperlink &amp; Interactive Tooltip
-            </span>
+            <span class="nav-tag">External Learning Resources</span>
         </div>
     </header>
 
-    <!-- Main Content Area -->
+    <!-- Main Content -->
     <main class="page-content" role="main">
-        <div class="intro-block">
-            <h1>External Link with Hover Tooltip</h1>
+        <article class="resource-card">
+            <span class="resource-badge">AI &amp; Emerging Technologies</span>
+            <h1>Explore Cutting-Edge AI Resources</h1>
             <p>
-                Demonstrating secure external tab navigation using <code>target="_blank"</code> with <code>rel="noopener noreferrer"</code>, accompanied by accessible hover and focus tooltips.
+                Connect to industry-leading artificial intelligence platforms and research publications to enhance your learning experience.
             </p>
-        </div>
 
-        <section class="showcase-grid" aria-label="Link Demonstration and Source Code">
-            <!-- Left: Interactive Live Preview -->
-            <div class="card-panel">
-                <h2>Interactive Live Preview</h2>
-                <div class="preview-area">
-                    <p class="preview-hint">Hover over or focus on the link below to inspect the tooltip:</p>
-
-                    <!-- Target Link with Tooltip -->
-                    <div class="tooltip-container">
-                        <a 
-                            href="https://openai.com/" 
-                            target="_blank" 
-                            rel="noopener noreferrer" 
-                            title="Visit OpenAI website" 
-                            class="openai-link"
-                            aria-describedby="openai-tooltip"
-                        >
-                            <span>Check OpenAI</span>
-                            <svg class="external-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
-                            </svg>
-                        </a>
-                        <span id="openai-tooltip" class="tooltip-bubble" role="tooltip">
-                            Visit OpenAI website
-                        </span>
-                    </div>
-
-                    <p style="font-size: 0.85rem; color: var(--muted-text);">
-                        Opens <strong>https://openai.com/</strong> in a new browser tab.
-                    </p>
-                </div>
-
-                <ul class="specs-list">
-                    <li>
-                        <span class="check-icon">&#10003;</span>
-                        <span><strong>target="_blank":</strong> Safely opens the destination page in a new browser tab.</span>
-                    </li>
-                    <li>
-                        <span class="check-icon">&#10003;</span>
-                        <span><strong>title="Visit OpenAI website":</strong> Standard native HTML tooltip on hover.</span>
-                    </li>
-                    <li>
-                        <span class="check-icon">&#10003;</span>
-                        <span><strong>rel="noopener noreferrer":</strong> Security protection against tab-napping / window.opener exploits.</span>
-                    </li>
-                </ul>
+            <!-- Question 2: Link to https://openai.com/ in new tab with tooltip on hover -->
+            <div class="tooltip-container">
+                <a 
+                    href="https://openai.com/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    title="Visit OpenAI website" 
+                    class="openai-btn"
+                    aria-describedby="openai-tooltip"
+                >
+                    <span>Check OpenAI</span>
+                    <svg class="external-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                    </svg>
+                </a>
+                <span id="openai-tooltip" class="tooltip-bubble" role="tooltip">
+                    Visit OpenAI website
+                </span>
             </div>
 
-            <!-- Right: Exact HTML Code Snippet -->
-            <div class="card-panel">
-                <h2>HTML Snippet</h2>
-                <div class="code-container">
-<span class="code-comment">&lt;!-- Question 2: Link with tooltip opening in new tab --&gt;</span>
-
-<span class="code-tag">&lt;a</span> 
-    <span class="code-attr">href</span>=<span class="code-val">"https://openai.com/"</span> 
-    <span class="code-attr">target</span>=<span class="code-val">"_blank"</span> 
-    <span class="code-attr">rel</span>=<span class="code-val">"noopener noreferrer"</span> 
-    <span class="code-attr">title</span>=<span class="code-val">"Visit OpenAI website"</span><span class="code-tag">&gt;</span>
-    Check OpenAI
-<span class="code-tag">&lt;/a&gt;</span>
-                </div>
-
-                <ul class="specs-list">
-                    <li>
-                        <span class="check-icon">&#10003;</span>
-                        <span><strong>Native &amp; Custom Tooltip:</strong> Includes both HTML native <code>title</code> and CSS enhanced bubble.</span>
-                    </li>
-                    <li>
-                        <span class="check-icon">&#10003;</span>
-                        <span><strong>Keyboard Accessible:</strong> Tooltip appears on both mouse hover and keyboard focus (<code>:focus-visible</code>).</span>
-                    </li>
-                </ul>
-            </div>
-        </section>
+            <span class="note-text">
+                Hover over the button to view the tooltip &bull; Opens in a new tab
+            </span>
+        </article>
     </main>
 
     <!-- Global Footer -->
