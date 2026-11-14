@@ -2,7 +2,6 @@
 
 [![Candidate: Rohit Srivastava](https://img.shields.io/badge/Candidate-Rohit%20Srivastava-00875a?style=for-the-badge)](https://github.com/rohit2215)
 [![Role: LMS Specialist](https://img.shields.io/badge/Role-LMS%20Specialist-111827?style=for-the-badge)](https://emeritus.org)
-[![Total Score: 100/100](https://img.shields.io/badge/Assessment%20Score-100%2F100%20Points-10b981?style=for-the-badge)]()
 [![W3C Valid & Accessible](https://img.shields.io/badge/Accessibility-WCAG%202.1%20AA%20Compliant-00875a?style=for-the-badge)]()
 
 ---
