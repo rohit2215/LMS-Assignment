@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Section II: Multiple Choice Questions (MCQs) | Emeritus</title>
+    <style>
+        :root {
+            --emeritus-green: #00875a;
+            --emeritus-green-hover: #006c48;
+            --emeritus-green-light: #e6f4ea;
+            --dark-heading: #111827;
+            --body-text: #374151;
+            --muted-text: #6b7280;
+            --border-light: #e5e7eb;
+            --bg-white: #ffffff;
+            --bg-canvas: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--body-text);
+            background-color: var(--bg-canvas);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Announcement Strip */
+        .top-strip {
+            width: 100%;
+            background-color: var(--emeritus-green);
+            color: #ffffff;
+            text-align: center;
+            padding: 0.65rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Full Width Header */
+        .site-nav {
+            width: 100%;
+            background-color: var(--bg-white);
+            border-bottom: 1px solid var(--border-light);
+            padding: 1.1rem 3rem;
+        }
+
+        .nav-wrapper {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-area {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            text-decoration: none;
+            color: var(--dark-heading);
+        }
+
+        .brand-badge {
+            width: 36px;
+            height: 36px;
+            border: 2.5px solid var(--emeritus-green);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.35rem;
+            color: var(--emeritus-green);
+        }
+
+        .brand-name {
+            font-size: 1.45rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--dark-heading);
+        }
+
+        .nav-tag {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--muted-text);
+        }
+
+        /* Main Content Container */
+        .page-content {
+            flex: 1;
+            width: 100%;
+            padding: 4rem 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .intro-header {
+            max-width: 800px;
+        }
+
+        .intro-header h1 {
+            font-size: clamp(2rem, 3.5vw, 2.75rem);
+            font-weight: 800;
+            color: var(--dark-heading);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .intro-header p {
+            font-size: 1.15rem;
+            color: var(--muted-text);
+        }
+
+        /* MCQ Questions List */
+        .mcq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.75rem;
+        }
+
+        .mcq-card {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 2rem 2.25rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .mcq-card:hover {
+            border-color: #cbd5e1;
+            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.06);
+        }
+
+        .question-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.85rem;
+        }
+
+        .q-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--emeritus-green-light);
+            color: var(--emeritus-green);
+            font-size: 0.95rem;
+            font-weight: 800;
+            flex-shrink: 0;
+            margin-top: 0.15rem;
+        }
+
+        .q-text {
+            font-size: 1.18rem;
+            font-weight: 700;
+            color: var(--dark-heading);
+            line-height: 1.45;
+        }
+
+        .options-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            padding-left: 2.75rem;
+        }
+
+        .option-item {
+            padding: 0.75rem 1.15rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-light);
+            font-size: 1rem;
+            color: var(--body-text);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            background-color: #fafbfc;
+        }
+
+        .option-item.correct {
+            background-color: var(--emeritus-green-light);
+            border-color: var(--emeritus-green);
+            color: var(--dark-heading);
+            font-weight: 600;
+        }
+
+        .correct-badge {
+            margin-left: auto;
+            background-color: var(--emeritus-green);
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.2rem 0.55rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .explanation-box {
+            margin-left: 2.75rem;
+            background-color: #f8fafc;
+            border-left: 3px solid var(--emeritus-green);
+            padding: 0.85rem 1.25rem;
+            border-radius: 0 6px 6px 0;
+            font-size: 0.95rem;
+            color: var(--muted-text);
+            line-height: 1.6;
+        }
+
+        .explanation-box strong {
+            color: var(--dark-heading);
+        }
+
+        /* Global Footer */
+        .site-footer {
+            width: 100%;
+            background-color: var(--dark-heading);
+            color: #9ca3af;
+            padding: 2rem 3rem;
+            margin-top: auto;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 860px) {
+            .site-nav, .page-content, .site-footer {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+            .options-list, .explanation-box {
+                padding-left: 0;
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Announcement Strip -->
+    <aside class="top-strip" aria-label="Global Banner">
+        Emeritus Technical Assessment &bull; HTML &amp; CSS Foundations
+    </aside>
+
+    <!-- Navigation Header -->
+    <header class="site-nav" role="banner">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-area" aria-label="Emeritus Home">
+                <div class="brand-badge" aria-hidden="true">E</div>
+                <span class="brand-name">Emeritus</span>
+            </a>
+            <span class="nav-tag">Theoretical Knowledge Evaluation</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="page-content" role="main">
+        <div class="intro-header">
+            <h1>Section II: Multiple Choice Questions</h1>
+            <p>
+                Theoretical knowledge assessment covering core HTML elements, tags, attributes, and basic CSS properties (Total: 10 points).
+            </p>
+        </div>
+
+        <section class="mcq-list" aria-label="Multiple Choice Questions">
+
+            <!-- Question 1 -->
+            <article class="mcq-card">
+                <div class="question-header">
+                    <span class="q-number">1</span>
+                    <h2 class="q-text">Which HTML tag is used to create a hyperlink? [1]</h2>
+                </div>
+                <ul class="options-list">
+                    <li class="option-item">a. &lt;p&gt;</li>
+                    <li class="option-item correct">
+                        <span>b. &lt;a&gt;</span>
+                        <span class="correct-badge">Correct Answer</span>
+                    </li>
+                    <li class="option-item">c. &lt;b&gt;</li>
+                    <li class="option-item">d. &lt;br&gt;</li>
+                </ul>
+                <div class="explanation-box">
+                    <strong>Explanation:</strong> The <code>&lt;a&gt;</code> (anchor) element with the <code>href</code> attribute defines a hyperlink connecting one web page or document to another.
+                </div>
+            </article>
+
+            <!-- Question 2 -->
+            <article class="mcq-card">
+                <div class="question-header">
+                    <span class="q-number">2</span>
+                    <h2 class="q-text">What tag is used to render an image on a webpage? [1]</h2>
+                </div>
+                <ul class="options-list">
+                    <li class="option-item correct">
+                        <span>a. img</span>
+                        <span class="correct-badge">Correct Answer</span>
+                    </li>
+                    <li class="option-item">b. src</li>
+                    <li class="option-item">c. image</li>
+                    <li class="option-item">d. None of the above</li>
+                </ul>
+                <div class="explanation-box">
+                    <strong>Explanation:</strong> The <code>&lt;img&gt;</code> tag is the standardized HTML element used to embed images. The <code>src</code> is an attribute specifying the image URL, not the tag name itself.
+                </div>
+            </article>
+
+            <!-- Question 3 -->
+            <article class="mcq-card">
+                <div class="question-header">
+                    <span class="q-number">3</span>
+                    <h2 class="q-text">Which HTML tag is called the root element of an HTML document? [1]</h2>
+                </div>
+                <ul class="options-list">
+                    <li class="option-item correct">
+                        <span>a. &lt;html&gt;</span>
+                        <span class="correct-badge">Correct Answer</span>
+                    </li>
+                    <li class="option-item">b. &lt;body&gt;</li>
+                    <li class="option-item">c. &lt;title&gt;</li>
+                    <li class="option-item">d. &lt;head&gt;</li>
+                </ul>
+                <div class="explanation-box">
+                    <strong>Explanation:</strong> The <code>&lt;html&gt;</code> element represents the root of an HTML document, enclosing all other elements (except for the <code>&lt;!DOCTYPE html&gt;</code> declaration).
+                </div>
+            </article>
+
+            <!-- Question 4 -->
+            <article class="mcq-card">
+                <div class="question-header">
+                    <span class="q-number">4</span>
+                    <h2 class="q-text">What is meant by an empty tag in HTML? [1]</h2>
+                </div>
+                <ul class="options-list">
+                    <li class="option-item">a. There is no such concept of an empty tag in HTML</li>
+                    <li class="option-item correct">
+                        <span>b. An empty tag does not require a closing tag</span>
+                        <span class="correct-badge">Correct Answer</span>
+                    </li>
+                    <li class="option-item">c. An empty tag cannot have any content within it</li>
+                    <li class="option-item">d. None of the above</li>
+                </ul>
+                <div class="explanation-box">
+                    <strong>Explanation:</strong> In HTML standards, empty tags (void elements such as <code>&lt;img&gt;</code>, <code>&lt;br&gt;</code>, <code>&lt;hr&gt;</code>, <code>&lt;input&gt;</code>) do not require and must not have a closing tag.
+                </div>
+            </article>
+
+            <!-- Question 5 -->
+            <article class="mcq-card">
+                <div class="question-header">
+                    <span class="q-number">5</span>
+                    <h2 class="q-text">Which of the following is correct about HTML? [1]</h2>
+                </div>
+                <ul class="options-list">
+                    <li class="option-item">a. HTML uses User Defined Tags.</li>
+                    <li class="option-item correct">
+                        <span>b. HTML uses tags defined within the language.</span>
+                        <span class="correct-badge">Correct Answer</span>
+                    </li>
+                    <li class="option-item">c. Both A and B.</li>
+                    <li class="option-item">d. None of the above.</li>
+                </ul>
+                <div class="explanation-box">
+                    <strong>Explanation:</strong> HTML utilizes standardized tags defined strictly by the W3C language specification (unlike XML, which allows developers to define custom user tags).
+                </div>
+            </article>
+
+            <!-- Question 6 -->
+            <article class="mcq-card">
+                <div class="question-header">
+                    <span class="q-number">6</span>
+                    <h2 class="q-text">Survey has one/more correct answer [1]</h2>
+                </div>
+                <ul class="options-list">
+                    <li class="option-item correct">
+                        <span>a. True</span>
+                        <span class="correct-badge">Correct Answer</span>
+                    </li>
+                    <li class="option-item">b. False</li>
+                </ul>
+                <div class="explanation-box">
+                    <strong>Explanation:</strong> In LMS assessment and feedback platforms, survey items can be designed as single-selection questions or multi-select/multi-response questionnaires.
+                </div>
+            </article>
+
+            <!-- Question 7 -->
+            <article class="mcq-card">
+                <div class="question-header">
+                    <span class="q-number">7</span>
+                    <h2 class="q-text">The “&lt;h1&gt;” tag is used for the smallest heading style. [1]</h2>
+                </div>
+                <ul class="options-list">
+                    <li class="option-item">a. True</li>
+                    <li class="option-item correct">
+                        <span>b. False</span>
+                        <span class="correct-badge">Correct Answer</span>
+                    </li>
+                </ul>
+                <div class="explanation-box">
+                    <strong>Explanation:</strong> <code>&lt;h1&gt;</code> designates the highest-level and largest heading style. <code>&lt;h6&gt;</code> represents the smallest heading style.
+                </div>
+            </article>
+
+            <!-- Question 8 -->
+            <article class="mcq-card">
+                <div class="question-header">
+                    <span class="q-number">8</span>
+                    <h2 class="q-text">The “&lt;caption&gt;” tag is used for _____________________. [1]</h2>
+                </div>
+                <ul class="options-list">
+                    <li class="option-item">a. defines a page caption</li>
+                    <li class="option-item">b. defines an image caption</li>
+                    <li class="option-item correct">
+                        <span>c. defines a table caption</span>
+                        <span class="correct-badge">Correct Answer</span>
+                    </li>
+                    <li class="option-item">d. None of the above</li>
+                </ul>
+                <div class="explanation-box">
+                    <strong>Explanation:</strong> The <code>&lt;caption&gt;</code> element is reserved specifically in HTML to define the title or accessible caption of a <code>&lt;table&gt;</code> element. (Image captions use <code>&lt;figcaption&gt;</code>).
+                </div>
+            </article>
+
+            <!-- Question 9 -->
+            <article class="mcq-card">
+                <div class="question-header">
+                    <span class="q-number">9</span>
+                    <h2 class="q-text">Which of the following is true about HTML tags? [1]</h2>
+                </div>
+                <ul class="options-list">
+                    <li class="option-item">a. Are case sensitive</li>
+                    <li class="option-item correct">
+                        <span>b. Are not case sensitive</span>
+                        <span class="correct-badge">Correct Answer</span>
+                    </li>
+                    <li class="option-item">c. Are in uppercase</li>
+                    <li class="option-item">d. Are in lowercase</li>
+                </ul>
+                <div class="explanation-box">
+                    <strong>Explanation:</strong> HTML tags are case-insensitive according to the HTML specification (e.g., <code>&lt;DIV&gt;</code> and <code>&lt;div&gt;</code> are treated identically), though lowercase is recommended for clean coding standards.
+                </div>
+            </article>
+
+            <!-- Question 10 -->
+            <article class="mcq-card">
+                <div class="question-header">
+                    <span class="q-number">10</span>
+                    <h2 class="q-text">Which of the following properties is used to change the font of text? [1]</h2>
+                </div>
+                <ul class="options-list">
+                    <li class="option-item correct">
+                        <span>a. font-family</span>
+                        <span class="correct-badge">Correct Answer</span>
+                    </li>
+                    <li class="option-item">b. font-size</li>
+                    <li class="option-item">c. text-align</li>
+                    <li class="option-item">d. None of the above</li>
+                </ul>
+                <div class="explanation-box">
+                    <strong>Explanation:</strong> In CSS, the <code>font-family</code> property sets the typeface/font of text elements. (<code>font-size</code> alters size, and <code>text-align</code> controls alignment).
+                </div>
+            </article>
+
+        </section>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-inner">
+            <p>&copy; 2026 Emeritus Edutech Platform &bull; Submission by Rohit Srivastava</p>
+            <p>Built with Accessible Semantic HTML5 &amp; CSS3</p>
+        </div>
+    </footer>
+</body>
+</html>
