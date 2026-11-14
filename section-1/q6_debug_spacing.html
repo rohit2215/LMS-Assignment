@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Spacing in Nested Lists | Emeritus</title>
+    <style>
+        :root {
+            --emeritus-green: #00875a;
+            --emeritus-green-hover: #006c48;
+            --emeritus-green-light: #e6f4ea;
+            --error-red: #ef4444;
+            --error-light: #fef2f2;
+            --dark-heading: #111827;
+            --body-text: #374151;
+            --muted-text: #6b7280;
+            --border-light: #e5e7eb;
+            --bg-white: #ffffff;
+            --bg-canvas: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--body-text);
+            background-color: var(--bg-canvas);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Announcement Strip */
+        .top-strip {
+            width: 100%;
+            background-color: var(--emeritus-green);
+            color: #ffffff;
+            text-align: center;
+            padding: 0.65rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Full Width Header */
+        .site-nav {
+            width: 100%;
+            background-color: var(--bg-white);
+            border-bottom: 1px solid var(--border-light);
+            padding: 1.1rem 3rem;
+        }
+
+        .nav-wrapper {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-area {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            text-decoration: none;
+            color: var(--dark-heading);
+        }
+
+        .brand-badge {
+            width: 36px;
+            height: 36px;
+            border: 2.5px solid var(--emeritus-green);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.35rem;
+            color: var(--emeritus-green);
+        }
+
+        .brand-name {
+            font-size: 1.45rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--dark-heading);
+        }
+
+        .nav-tag {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--muted-text);
+        }
+
+        /* Main Content Container */
+        .page-content {
+            flex: 1;
+            width: 100%;
+            padding: 4rem 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .intro-header {
+            max-width: 850px;
+        }
+
+        .intro-header h1 {
+            font-size: clamp(2rem, 3.5vw, 2.75rem);
+            font-weight: 800;
+            color: var(--dark-heading);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .intro-header p {
+            font-size: 1.15rem;
+            color: var(--muted-text);
+        }
+
+        /* Comparison Grid */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .comparison-card {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header {
+            padding: 1.25rem 1.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .card-header h2 {
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        .badge-bug {
+            background-color: var(--error-light);
+            color: var(--error-red);
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 0.25rem 0.65rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .badge-fixed {
+            background-color: var(--emeritus-green-light);
+            color: var(--emeritus-green);
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 0.25rem 0.65rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .card-body {
+            padding: 2rem;
+            flex: 1;
+        }
+
+        .preview-box {
+            background-color: #fafbfc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem 2rem;
+            font-size: 1.05rem;
+        }
+
+        /* Highlights for unwanted space in the buggy version */
+        .gap-indicator {
+            background-color: #fee2e2;
+            color: #b91c1c;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.15rem 0.5rem;
+            border-radius: 3px;
+            display: inline-block;
+            margin: 0.2rem 0;
+            border: 1px dashed #ef4444;
+        }
+
+        /* Root Cause Callout */
+        .analysis-card {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-left: 4px solid var(--emeritus-green);
+            border-radius: 8px;
+            padding: 1.75rem 2rem;
+        }
+
+        .analysis-card h3 {
+            font-size: 1.25rem;
+            color: var(--dark-heading);
+            margin-bottom: 0.75rem;
+        }
+
+        .analysis-card ul {
+            list-style: none;
+            padding-left: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .analysis-card li {
+            position: relative;
+            padding-left: 1.5rem;
+            font-size: 1rem;
+            color: var(--body-text);
+        }
+
+        .analysis-card li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--emeritus-green);
+            font-weight: 800;
+        }
+
+        /* Code Block Container */
+        .code-block {
+            background-color: #0f172a;
+            color: #f8fafc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            overflow-x: auto;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.925rem;
+            line-height: 1.6;
+            margin-top: 1rem;
+        }
+
+        .code-tag { color: #38bdf8; }
+        .code-attr { color: #a3e635; }
+        .code-val { color: #fde047; }
+        .code-comment { color: #94a3b8; font-style: italic; }
+
+        /* Global Footer */
+        .site-footer {
+            width: 100%;
+            background-color: var(--dark-heading);
+            color: #9ca3af;
+            padding: 2rem 3rem;
+            margin-top: auto;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 900px) {
+            .site-nav, .page-content, .site-footer {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Announcement Strip -->
+    <aside class="top-strip" aria-label="Global Banner">
+        Emeritus Technical Assessment &bull; HTML &amp; CSS Debugging
+    </aside>
+
+    <!-- Navigation Header -->
+    <header class="site-nav" role="banner">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-area" aria-label="Emeritus Home">
+                <div class="brand-badge" aria-hidden="true">E</div>
+                <span class="brand-name">Emeritus</span>
+            </a>
+            <span class="nav-tag">Code Debugging &bull; Spacing Remediation</span>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="page-content" role="main">
+        <div class="intro-header">
+            <h1>Nested List Spacing Remediation</h1>
+            <p>
+                Diagnosing and eliminating unwanted browser default margins around paragraph and nested list elements within ordered lists.
+            </p>
+        </div>
+
+        <!-- Root Cause Analysis -->
+        <section class="analysis-card" aria-label="Root Cause Analysis">
+            <h3>Root Cause of Extra Highlighted Space:</h3>
+            <ul>
+                <li><strong>Browser Default Paragraph Margins:</strong> Browsers apply default <code>margin-top: 1em;</code> and <code>margin-bottom: 1em;</code> (typically 16px) to <code>&lt;p&gt;</code> tags.</li>
+                <li><strong>Browser Default List Margins:</strong> Browsers apply default <code>margin-bottom: 1em;</code> on the first <code>&lt;ul&gt;</code> and <code>margin-top: 1em;</code> on the second <code>&lt;ul&gt;</code>.</li>
+                <li><strong>Fix:</strong> Apply <code>style="margin: 0;"</code> to the intermediate <code>&lt;p&gt;</code> and reset top/bottom margins on the adjacent nested <code>&lt;ul&gt;</code> tags, eliminating the vertical gaps completely.</li>
+            </ul>
+        </section>
+
+        <!-- Comparison: Before vs After -->
+        <section class="comparison-grid" aria-label="Code Comparison">
+            <!-- Left: Buggy Version -->
+            <div class="comparison-card">
+                <div class="card-header">
+                    <h2>Original Code (With Extra Space)</h2>
+                    <span class="badge-bug">Before &bull; Buggy</span>
+                </div>
+                <div class="card-body">
+                    <div class="preview-box">
+                        <!-- Original Buggy Code as in PDF -->
+                        <ol>
+                            <li style="margin-bottom: 0px;"><strong><strong>Bike</strong></strong>
+                                <ul style="list-style-type: disc;">
+                                    <li style="margin-bottom: 0px;"><strong>Bajaj</strong></li>
+                                    <li style="margin-bottom: 0px;"><strong>Hero</strong></li>
+                                    <li style="margin-bottom: 0px;"><strong>TVS</strong></li>
+                                </ul>
+                                <div class="gap-indicator">&larr; Extra Space (ul bottom margin + p top margin)</div>
+                                <p>Above are Indian brand</p>
+                                <div class="gap-indicator">&larr; Extra Space (p bottom margin + ul top margin)</div>
+                                <ul style="list-style-type: disc;">
+                                    <li style="margin-bottom: 0px;"><strong>Honda</strong></li>
+                                    <li style="margin-bottom: 0px;"><strong>Yamaha</strong></li>
+                                    <li style="margin-bottom: 0px;"><strong>Kawasaki</strong></li>
+                                </ul>
+                            </li>
+                            <li style="margin-bottom: 0px;"><strong><strong>Car</strong></strong>
+                                <ul style="list-style-type: disc;">
+                                    <li style="margin-bottom: 0px;"><strong>Maruti</strong></li>
+                                    <li style="margin-bottom: 0px;"><strong>Tata</strong></li>
+                                    <li style="margin-bottom: 0px;"><strong>Ashok Leyland</strong></li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right: Debugged Version -->
+            <div class="comparison-card">
+                <div class="card-header">
+                    <h2>Debugged Code (Extra Space Removed)</h2>
+                    <span class="badge-fixed">After &bull; Fixed</span>
+                </div>
+                <div class="card-body">
+                    <div class="preview-box">
+                        <!-- Question 6: Corrected HTML removing extra spacing -->
+                        <ol style="margin-bottom: 0; padding-left: 20px;">
+                            <li style="margin-bottom: 0px;"><strong>Bike</strong>
+                                <ul style="list-style-type: disc; margin-top: 0; margin-bottom: 0; padding-left: 20px;">
+                                    <li style="margin-bottom: 0px;"><strong>Bajaj</strong></li>
+                                    <li style="margin-bottom: 0px;"><strong>Hero</strong></li>
+                                    <li style="margin-bottom: 0px;"><strong>TVS</strong></li>
+                                </ul>
+                                <p style="margin: 0; padding-left: 0;">Above are Indian brand</p>
+                                <ul style="list-style-type: disc; margin-top: 0; margin-bottom: 0; padding-left: 20px;">
+                                    <li style="margin-bottom: 0px;"><strong>Honda</strong></li>
+                                    <li style="margin-bottom: 0px;"><strong>Yamaha</strong></li>
+                                    <li style="margin-bottom: 0px;"><strong>Kawasaki</strong></li>
+                                </ul>
+                            </li>
+                            <li style="margin-bottom: 0px; margin-top: 4px;"><strong>Car</strong>
+                                <ul style="list-style-type: disc; margin-top: 0; margin-bottom: 0; padding-left: 20px;">
+                                    <li style="margin-bottom: 0px;"><strong>Maruti</strong></li>
+                                    <li style="margin-bottom: 0px;"><strong>Tata</strong></li>
+                                    <li style="margin-bottom: 0px;"><strong>Ashok Leyland</strong></li>
+                                </ul>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Clean Corrected Code Snippet -->
+        <section aria-labelledby="code-snippet-title">
+            <h2 id="code-snippet-title" style="font-size: 1.35rem; font-weight: 700; color: var(--dark-heading); margin-bottom: 0.5rem;">
+                Corrected HTML Code Snippet
+            </h2>
+            <div class="code-block">
+<span class="code-tag">&lt;ol&gt;</span>
+  <span class="code-tag">&lt;li</span> <span class="code-attr">style</span>=<span class="code-val">"margin-bottom: 0px;"</span><span class="code-tag">&gt;&lt;strong&gt;</span>Bike<span class="code-tag">&lt;/strong&gt;</span>
+    <span class="code-tag">&lt;ul</span> <span class="code-attr">style</span>=<span class="code-val">"list-style-type: disc; margin-bottom: 0px;"</span><span class="code-tag">&gt;</span>
+      <span class="code-tag">&lt;li</span> <span class="code-attr">style</span>=<span class="code-val">"margin-bottom: 0px;"</span><span class="code-tag">&gt;&lt;strong&gt;</span>Bajaj<span class="code-tag">&lt;/strong&gt;&lt;/li&gt;</span>
+      <span class="code-tag">&lt;li</span> <span class="code-attr">style</span>=<span class="code-val">"margin-bottom: 0px;"</span><span class="code-tag">&gt;&lt;strong&gt;</span>Hero<span class="code-tag">&lt;/strong&gt;&lt;/li&gt;</span>
+      <span class="code-tag">&lt;li</span> <span class="code-attr">style</span>=<span class="code-val">"margin-bottom: 0px;"</span><span class="code-tag">&gt;&lt;strong&gt;</span>TVS<span class="code-tag">&lt;/strong&gt;&lt;/li&gt;</span>
+    <span class="code-tag">&lt;/ul&gt;</span>
+    <span class="code-comment">&lt;!-- Added style="margin: 0px;" to remove highlighted vertical space --&gt;</span>
+    <span class="code-tag">&lt;p</span> <span class="code-attr">style</span>=<span class="code-val">"margin: 0px;"</span><span class="code-tag">&gt;</span>Above are Indian brand<span class="code-tag">&lt;/p&gt;</span>
+    <span class="code-tag">&lt;ul</span> <span class="code-attr">style</span>=<span class="code-val">"list-style-type: disc; margin-top: 0px;"</span><span class="code-tag">&gt;</span>
+      <span class="code-tag">&lt;li</span> <span class="code-attr">style</span>=<span class="code-val">"margin-bottom: 0px;"</span><span class="code-tag">&gt;&lt;strong&gt;</span>Honda<span class="code-tag">&lt;/strong&gt;&lt;/li&gt;</span>
+      <span class="code-tag">&lt;li</span> <span class="code-attr">style</span>=<span class="code-val">"margin-bottom: 0px;"</span><span class="code-tag">&gt;&lt;strong&gt;</span>Yamaha<span class="code-tag">&lt;/strong&gt;&lt;/li&gt;</span>
+      <span class="code-tag">&lt;li</span> <span class="code-attr">style</span>=<span class="code-val">"margin-bottom: 0px;"</span><span class="code-tag">&gt;&lt;strong&gt;</span>Kawasaki<span class="code-tag">&lt;/strong&gt;&lt;/li&gt;</span>
+    <span class="code-tag">&lt;/ul&gt;</span>
+  <span class="code-tag">&lt;/li&gt;</span>
+  <span class="code-tag">&lt;li</span> <span class="code-attr">style</span>=<span class="code-val">"margin-bottom: 0px;"</span><span class="code-tag">&gt;&lt;strong&gt;</span>Car<span class="code-tag">&lt;/strong&gt;</span>
+    <span class="code-tag">&lt;ul</span> <span class="code-attr">style</span>=<span class="code-val">"list-style-type: disc;"</span><span class="code-tag">&gt;</span>
+      <span class="code-tag">&lt;li</span> <span class="code-attr">style</span>=<span class="code-val">"margin-bottom: 0px;"</span><span class="code-tag">&gt;&lt;strong&gt;</span>Maruti<span class="code-tag">&lt;/strong&gt;&lt;/li&gt;</span>
+      <span class="code-tag">&lt;li</span> <span class="code-attr">style</span>=<span class="code-val">"margin-bottom: 0px;"</span><span class="code-tag">&gt;&lt;strong&gt;</span>Tata<span class="code-tag">&lt;/strong&gt;&lt;/li&gt;</span>
+      <span class="code-tag">&lt;li</span> <span class="code-attr">style</span>=<span class="code-val">"margin-bottom: 0px;"</span><span class="code-tag">&gt;&lt;strong&gt;</span>Ashok Leyland<span class="code-tag">&lt;/strong&gt;&lt;/li&gt;</span>
+    <span class="code-tag">&lt;/ul&gt;</span>
+  <span class="code-tag">&lt;/li&gt;</span>
+<span class="code-tag">&lt;/ol&gt;</span>
+            </div>
+        </section>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-inner">
+            <p>&copy; 2026 Emeritus Edutech Platform &bull; Submission by Rohit Srivastava</p>
+            <p>Built with Accessible Semantic HTML5 &amp; CSS3</p>
+        </div>
+    </footer>
+</body>
+</html>
