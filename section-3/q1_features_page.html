@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to My Website | Explore the Features</title>
+    <style>
+        :root {
+            --emeritus-green: #00875a;
+            --emeritus-green-hover: #006c48;
+            --emeritus-green-light: #e6f4ea;
+            --dark-heading: #111827;
+            --body-text: #374151;
+            --muted-text: #6b7280;
+            --border-light: #e5e7eb;
+            /* Requirement: A background color of your choice for the entire page */
+            --page-bg: #f4fbf7;
+            --surface-bg: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Requirement: A background color of your choice for the entire page */
+        html, body {
+            width: 100%;
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--body-text);
+            background-color: var(--page-bg);
+            line-height: 1.65;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Announcement Strip */
+        .top-strip {
+            width: 100%;
+            background-color: var(--emeritus-green);
+            color: #ffffff;
+            text-align: center;
+            padding: 0.65rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Full Width Header */
+        .site-nav {
+            width: 100%;
+            background-color: var(--surface-bg);
+            border-bottom: 1px solid var(--border-light);
+            padding: 1.1rem 3rem;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .nav-wrapper {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-area {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            text-decoration: none;
+            color: var(--dark-heading);
+        }
+
+        .brand-badge {
+            width: 36px;
+            height: 36px;
+            border: 2.5px solid var(--emeritus-green);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.35rem;
+            color: var(--emeritus-green);
+        }
+
+        .brand-name {
+            font-size: 1.45rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--dark-heading);
+        }
+
+        /* Full Width Hero Banner */
+        .hero-banner {
+            width: 100%;
+            background-color: var(--surface-bg);
+            border-bottom: 1px solid var(--border-light);
+            padding: 4.5rem 3rem 4rem;
+        }
+
+        .hero-inner {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Requirement 1: Main heading with text "Welcome to My Website" and distinct header separation */
+        .title-header {
+            border-bottom: 3px solid var(--emeritus-green);
+            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 4.5vw, 3.5rem);
+            font-weight: 800;
+            color: var(--dark-heading);
+            letter-spacing: -0.03em;
+            line-height: 1.15;
+            margin: 0;
+        }
+
+        /* Requirement 2: Subheading with text "Explore the Features" */
+        h2 {
+            font-size: clamp(1.5rem, 2.5vw, 2rem);
+            font-weight: 700;
+            color: var(--emeritus-green);
+            letter-spacing: -0.015em;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero-lead {
+            font-size: 1.2rem;
+            color: var(--muted-text);
+            max-width: 800px;
+            line-height: 1.7;
+        }
+
+        /* Full Width Main Page Content */
+        .main-content {
+            flex: 1;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-header h3 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: var(--dark-heading);
+            margin-bottom: 0.35rem;
+        }
+
+        .section-header p {
+            color: var(--muted-text);
+            font-size: 1.05rem;
+        }
+
+        /* Requirement 3: Unordered list with at least three items (styled as full-width responsive grid) */
+        .features-unordered-grid {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .unordered-card {
+            background-color: var(--surface-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s ease;
+        }
+
+        .unordered-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--emeritus-green);
+            box-shadow: 0 10px 20px rgba(0, 135, 90, 0.08);
+        }
+
+        .bullet-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: var(--emeritus-green-light);
+            color: var(--emeritus-green);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+
+        .unordered-card-body h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--dark-heading);
+            margin-bottom: 0.4rem;
+        }
+
+        .unordered-card-body p {
+            font-size: 0.975rem;
+            color: var(--body-text);
+            line-height: 1.6;
+        }
+
+        /* Requirement 4: Ordered list with at least three items (styled as full-width workflow steps) */
+        .features-ordered-grid {
+            list-style: none;
+            counter-reset: step-counter;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            width: 100%;
+        }
+
+        .ordered-card {
+            counter-increment: step-counter;
+            background-color: var(--surface-bg);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 2rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 1.25rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
+            transition: all 0.2s ease;
+        }
+
+        .ordered-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--emeritus-green);
+            box-shadow: 0 10px 20px rgba(0, 135, 90, 0.08);
+        }
+
+        .step-number {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background-color: var(--emeritus-green);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .ordered-card-body h4 {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--dark-heading);
+            margin-bottom: 0.4rem;
+        }
+
+        .ordered-card-body p {
+            font-size: 0.975rem;
+            color: var(--body-text);
+            line-height: 1.6;
+        }
+
+        /* Requirement 6: A paragraph with some text and a bullet point list within it */
+        .methodology-block {
+            background-color: var(--surface-bg);
+            border: 1px solid var(--border-light);
+            border-left: 5px solid var(--emeritus-green);
+            border-radius: 12px;
+            padding: 2.75rem 3rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.04);
+        }
+
+        .methodology-block h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-heading);
+            margin-bottom: 1rem;
+        }
+
+        .methodology-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--body-text);
+            margin-bottom: 1.5rem;
+        }
+
+        .methodology-bullets {
+            list-style: disc;
+            padding-left: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            font-size: 1.05rem;
+        }
+
+        .methodology-bullets li::marker {
+            color: var(--emeritus-green);
+        }
+
+        .methodology-bullets strong {
+            color: var(--dark-heading);
+        }
+
+        /* Global Footer */
+        .site-footer {
+            width: 100%;
+            background-color: var(--dark-heading);
+            color: #9ca3af;
+            padding: 2.5rem 3rem;
+            margin-top: auto;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .footer-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 860px) {
+            .site-nav, .hero-banner, .main-content, .site-footer {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+            .methodology-block {
+                padding: 2rem 1.5rem;
+            }
+            .features-unordered-grid, .features-ordered-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Announcement Strip -->
+    <aside class="top-strip" aria-label="Global Banner">
+        Unlock new opportunities by upskilling and stepping into a brighter future.
+    </aside>
+
+    <!-- Navigation Header -->
+    <header class="site-nav" role="banner">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-area" aria-label="Emeritus Home">
+                <div class="brand-badge" aria-hidden="true">E</div>
+                <span class="brand-name">Emeritus</span>
+            </a>
+            <span style="font-size: 0.95rem; font-weight: 600; color: var(--muted-text);">
+                Section III &bull; Free Form Webpage
+            </span>
+        </div>
+    </header>
+
+    <!-- Full-Width Hero Section -->
+    <section class="hero-banner" aria-labelledby="main-heading">
+        <div class="hero-inner">
+            <!-- Requirement 1: Main heading "Welcome to My Website" with header separation -->
+            <header class="title-header">
+                <h1 id="main-heading">Welcome to My Website</h1>
+            </header>
+
+            <!-- Requirement 2: Subheading "Explore the Features" -->
+            <h2>Explore the Features</h2>
+            
+            <p class="hero-lead">
+                Discover our next-generation digital learning environment designed to empower students, educators, and enterprise teams across the globe.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content Flow (Full Page) -->
+    <main class="main-content" role="main">
+
+        <!-- Requirement 3: Unordered List with at least three items -->
+        <section aria-labelledby="unordered-title">
+            <div class="section-header">
+                <h3 id="unordered-title">Key Platform Highlights (Unordered List)</h3>
+                <p>Core platform capabilities delivering modern, accessible education.</p>
+            </div>
+
+            <ul class="features-unordered-grid" role="list">
+                <li class="unordered-card">
+                    <span class="bullet-icon" aria-hidden="true">&bull;</span>
+                    <div class="unordered-card-body">
+                        <h4>Adaptive Learning Engine</h4>
+                        <p>Personalizes study pathways and dynamically calibrates assessment difficulty to each individual student's mastery level.</p>
+                    </div>
+                </li>
+
+                <li class="unordered-card">
+                    <span class="bullet-icon" aria-hidden="true">&bull;</span>
+                    <div class="unordered-card-body">
+                        <h4>Collaborative Cohort Workspaces</h4>
+                        <p>Enables active peer collaboration through threaded discussion forums, group project hubs, and real-time mentor clinics.</p>
+                    </div>
+                </li>
+
+                <li class="unordered-card">
+                    <span class="bullet-icon" aria-hidden="true">&bull;</span>
+                    <div class="unordered-card-body">
+                        <h4>Enterprise LMS Interoperability</h4>
+                        <p>Seamlessly integrates with Canvas, Moodle, and Blackboard via modern LTI and SCORM interoperability standards.</p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Requirement 4: Ordered List with at least three items -->
+        <section aria-labelledby="ordered-title">
+            <div class="section-header">
+                <h3 id="ordered-title">Getting Started Workflow (Ordered List)</h3>
+                <p>Follow three simple steps to begin your executive learning journey.</p>
+            </div>
+
+            <ol class="features-ordered-grid" role="list">
+                <li class="ordered-card">
+                    <span class="step-number" aria-hidden="true">1</span>
+                    <div class="ordered-card-body">
+                        <h4>Create Your Account</h4>
+                        <p>Register with your professional or institutional credentials and set up your personalized learner profile.</p>
+                    </div>
+                </li>
+
+                <li class="ordered-card">
+                    <span class="step-number" aria-hidden="true">2</span>
+                    <div class="ordered-card-body">
+                        <h4>Enroll in an Accredited Track</h4>
+                        <p>Browse our executive curriculum and select the cohort that aligns with your professional development goals.</p>
+                    </div>
+                </li>
+
+                <li class="ordered-card">
+                    <span class="step-number" aria-hidden="true">3</span>
+                    <div class="ordered-card-body">
+                        <h4>Complete Projects &amp; Earn Credentials</h4>
+                        <p>Submit hands-on assignments, receive actionable faculty feedback, and earn recognized university certification.</p>
+                    </div>
+                </li>
+            </ol>
+        </section>
+
+        <!-- Requirement 6: A paragraph with some text and a bullet point list within it -->
+        <section class="methodology-block" aria-labelledby="methodology-heading">
+            <h3 id="methodology-heading">Our Instructional Methodology</h3>
+            <p class="methodology-text">
+                At Emeritus, our educational architecture combines academic excellence from world-class universities with innovative educational technology. We deliver high-impact learning experiences supported by the following foundational pillars:
+            </p>
+            
+            <ul class="methodology-bullets" role="list">
+                <li><strong>Interactive Faculty Masterclasses:</strong> Live, synchronous lectures led by renowned university professors.</li>
+                <li><strong>Applied Hands-On Simulations:</strong> Practical virtual sandbox environments that bridge theory with real-world industry execution.</li>
+                <li><strong>Continuous 1-on-1 Mentorship:</strong> Direct office hour access, personalized assignment reviews, and continuous learner guidance.</li>
+            </ul>
+        </section>
+
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-inner">
+            <p>&copy; 2026 Emeritus Edutech Platform &bull; Submission by Rohit Srivastava</p>
+            <p>Built with Semantic HTML5 &amp; CSS3</p>
+        </div>
+    </footer>
+</body>
+</html>
