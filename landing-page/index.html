@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emeritus LMS Specialist Test | Solutions Portal</title>
+    <meta name="description" content="Emeritus LMS Specialist Assessment Submission Portal by Rohit Srivastava. Explore solutions for Section 1, Section 2, and Section 3.">
+    <style>
+        :root {
+            --emeritus-green: #00875a;
+            --emeritus-green-hover: #006c48;
+            --emeritus-green-light: #e6f4ea;
+            --emeritus-green-subtle: #f0fdf4;
+            --dark-heading: #111827;
+            --body-text: #374151;
+            --muted-text: #6b7280;
+            --border-light: #e5e7eb;
+            --bg-white: #ffffff;
+            --bg-canvas: #f8fafc;
+            --sidebar-width: 340px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--body-text);
+            background-color: var(--bg-canvas);
+            line-height: 1.5;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Bar */
+        .portal-header {
+            height: 64px;
+            background-color: var(--bg-white);
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+            z-index: 50;
+            flex-shrink: 0;
+            gap: 1rem;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--dark-heading);
+            flex-shrink: 0;
+        }
+
+        .brand-badge {
+            width: 34px;
+            height: 34px;
+            border: 2px solid var(--emeritus-green);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.25rem;
+            color: var(--emeritus-green);
+        }
+
+        .brand-title-group h1 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--dark-heading);
+            letter-spacing: 0.02em;
+            line-height: 1.2;
+        }
+
+        .brand-title-group p {
+            font-size: 0.75rem;
+            color: var(--muted-text);
+            font-weight: 600;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        /* Mode Switcher: UI Preview vs Source Code */
+        .view-mode-toggle {
+            display: flex;
+            background-color: #f1f5f9;
+            padding: 3px;
+            border-radius: 6px;
+            gap: 2px;
+        }
+
+        .mode-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: transparent;
+            border: none;
+            padding: 0.4rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.825rem;
+            font-weight: 600;
+            color: var(--muted-text);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .mode-btn.active {
+            background: #ffffff;
+            color: var(--emeritus-green);
+            font-weight: 700;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        /* Device Switcher Controls */
+        .device-toggle-group {
+            display: flex;
+            align-items: center;
+            background-color: #f1f5f9;
+            padding: 3px;
+            border-radius: 6px;
+            gap: 2px;
+        }
+
+        .device-btn {
+            background: transparent;
+            border: none;
+            padding: 0.35rem 0.65rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--muted-text);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .device-btn.active {
+            background: #ffffff;
+            color: var(--dark-heading);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-light);
+            padding: 0.4rem 0.85rem;
+            border-radius: 6px;
+            font-size: 0.825rem;
+            font-weight: 600;
+            color: var(--dark-heading);
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-action:hover {
+            border-color: var(--emeritus-green);
+            color: var(--emeritus-green);
+        }
+
+        .candidate-chip {
+            background-color: var(--emeritus-green-light);
+            color: var(--emeritus-green);
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 0.35rem 0.85rem;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        /* Portal Layout Body */
+        .portal-layout {
+            flex: 1;
+            display: flex;
+            height: calc(100vh - 64px);
+            overflow: hidden;
+        }
+
+        /* Sidebar Navigation */
+        .sidebar {
+            width: var(--sidebar-width);
+            background-color: var(--bg-white);
+            border-right: 1px solid var(--border-light);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            height: 100%;
+        }
+
+        .sidebar-header {
+            padding: 1.25rem 1.25rem 0.75rem;
+            border-bottom: 1px solid var(--border-light);
+        }
+
+        .sidebar-header h2 {
+            font-size: 0.85rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted-text);
+            margin-bottom: 0.5rem;
+        }
+
+        .score-pill-strip {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .score-pill {
+            flex: 1;
+            background-color: var(--emeritus-green-subtle);
+            border: 1px solid rgba(0, 135, 90, 0.2);
+            padding: 0.4rem 0.5rem;
+            border-radius: 6px;
+            text-align: center;
+        }
+
+        .score-pill span {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--muted-text);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .score-pill strong {
+            font-size: 0.95rem;
+            color: var(--emeritus-green);
+            font-weight: 800;
+        }
+
+        .sidebar-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .section-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.35rem;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--muted-text);
+            padding: 0.25rem 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-item-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            background: transparent;
+            border: 1px solid transparent;
+            padding: 0.65rem 0.85rem;
+            border-radius: 8px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            gap: 0.75rem;
+            color: var(--body-text);
+        }
+
+        .nav-item-btn:hover {
+            background-color: #f1f5f9;
+            color: var(--dark-heading);
+        }
+
+        .nav-item-btn.active {
+            background-color: var(--emeritus-green-light);
+            border-color: rgba(0, 135, 90, 0.3);
+            color: var(--emeritus-green);
+            font-weight: 700;
+        }
+
+        .nav-item-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+            min-width: 0;
+        }
+
+        .nav-item-title {
+            font-size: 0.925rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .nav-item-sub {
+            font-size: 0.75rem;
+            color: var(--muted-text);
+        }
+
+        .nav-item-btn.active .nav-item-sub {
+            color: var(--emeritus-green);
+            opacity: 0.85;
+        }
+
+        .points-tag {
+            font-size: 0.75rem;
+            font-weight: 700;
+            background-color: #f1f5f9;
+            color: var(--muted-text);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+
+        .nav-item-btn.active .points-tag {
+            background-color: var(--emeritus-green);
+            color: #ffffff;
+        }
+
+        /* Main Workspace Viewport */
+        .workspace {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: #f1f5f9;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Viewport Context Bar */
+        .context-bar {
+            background-color: var(--bg-white);
+            border-bottom: 1px solid var(--border-light);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .context-meta h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--dark-heading);
+        }
+
+        .context-meta p {
+            font-size: 0.85rem;
+            color: var(--muted-text);
+        }
+
+        .context-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        .iframe-container-wrap {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            overflow: hidden;
+        }
+
+        .preview-frame-shell {
+            width: 100%;
+            height: 100%;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+            transition: width 0.3s ease;
+            position: relative;
+        }
+
+        .preview-frame-shell.tablet {
+            width: 768px;
+        }
+
+        .preview-frame-shell.mobile {
+            width: 390px;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* In-Portal Source Code Viewer Container */
+        .code-viewer-container {
+            display: none;
+            width: 100%;
+            height: 100%;
+            background-color: #0f172a;
+            color: #f8fafc;
+            overflow: auto;
+            padding: 1.5rem 2rem;
+            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            font-size: 0.925rem;
+            line-height: 1.65;
+            position: relative;
+        }
+
+        .code-viewer-container pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .copy-btn:hover {
+            background-color: rgba(255, 255, 255, 0.25);
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 990px) {
+            .device-toggle-group {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .portal-layout {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                height: 220px;
+            }
+            .candidate-chip {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="portal-header">
+        <div class="header-brand">
+            <div class="brand-badge" aria-hidden="true">E</div>
+            <div class="brand-title-group">
+                <h1>Emeritus LMS Specialist Test</h1>
+                <p>Interactive Solutions Portal &bull; Candidate: Rohit Srivastava</p>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <!-- View Mode Switcher: UI Preview vs Source Code -->
+            <div class="view-mode-toggle" aria-label="View Mode">
+                <button class="mode-btn active" id="mode-ui" onclick="setViewMode('ui')">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path></svg>
+                    <span>Output UI</span>
+                </button>
+                <button class="mode-btn" id="mode-code" onclick="setViewMode('code')">
+                    <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    <span>Source Code</span>
+                </button>
+            </div>
+
+            <!-- Device Width Switcher -->
+            <div class="device-toggle-group" id="device-controls" aria-label="Device Preview Width">
+                <button class="device-btn active" id="btn-desktop" onclick="setDevice('desktop')">Desktop</button>
+                <button class="device-btn" id="btn-tablet" onclick="setDevice('tablet')">Tablet (768px)</button>
+                <button class="device-btn" id="btn-mobile" onclick="setDevice('mobile')">Mobile (390px)</button>
+            </div>
+
+            <!-- GitHub Source Link Button -->
+            <a id="btn-github-code" href="https://github.com/rohit2215/LMS-Assignment/blob/main/section-1/q1_welcome_edutech.html" target="_blank" class="btn-action" title="View Source Code on GitHub">
+                <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+                <span>GitHub Source</span>
+            </a>
+
+            <!-- Fullscreen Open in Tab -->
+            <a id="btn-open-new-tab" href="../section-1/q1_welcome_edutech.html" target="_blank" class="btn-action" title="Open Solution Fullscreen in New Tab">
+                <span>Open in Tab</span>
+                <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+            </a>
+        </div>
+    </header>
+
+    <!-- Portal Body -->
+    <div class="portal-layout">
+        <!-- Sidebar Navigation -->
+        <nav class="sidebar" aria-label="Assessment Sections Navigation">
+            <div class="sidebar-header">
+                <h2>Evaluation Sections</h2>
+                <div class="score-pill-strip">
+                    <div class="score-pill">
+                        <span>Sec I</span>
+                        <strong>70 Pts</strong>
+                    </div>
+                    <div class="score-pill">
+                        <span>Sec II</span>
+                        <strong>10 Pts</strong>
+                    </div>
+                    <div class="score-pill">
+                        <span>Sec III</span>
+                        <strong>20 Pts</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-scroll">
+                
+                <!-- Section I -->
+                <div class="section-group">
+                    <div class="section-label">
+                        <span>Section I: Basic HTML &amp; CSS</span>
+                        <span>70 Pts</span>
+                    </div>
+
+                    <button class="nav-item-btn active" onclick="loadSolution('../section-1/q1_welcome_edutech.html', 'section-1/q1_welcome_edutech.html', 'Section I &bull; Question 1', 'Accessible Edutech Welcome Webpage', '10 Pts', this)">
+                        <div class="nav-item-info">
+                            <span class="nav-item-title">Q1: Welcome to Edutech</span>
+                            <span class="nav-item-sub">Full page, benefits grid, accessible</span>
+                        </div>
+                        <span class="points-tag">10 pts</span>
+                    </button>
+
+                    <button class="nav-item-btn" onclick="loadSolution('../section-1/q2_link_tooltip.html', 'section-1/q2_link_tooltip.html', 'Section I &bull; Question 2', 'OpenAI Link with Hover Tooltip in New Tab', '5 Pts', this)">
+                        <div class="nav-item-info">
+                            <span class="nav-item-title">Q2: Link with Tooltip</span>
+                            <span class="nav-item-sub">OpenAI target=_blank, hover tooltip</span>
+                        </div>
+                        <span class="points-tag">5 pts</span>
+                    </button>
+
+                    <button class="nav-item-btn" onclick="loadSolution('../section-1/q3_faculty_table.html', 'section-1/q3_faculty_table.html', 'Section I &bull; Question 3', 'Accessible Faculty Details Table', '5 Pts', this)">
+                        <div class="nav-item-info">
+                            <span class="nav-item-title">Q3: Faculty Table</span>
+                            <span class="nav-item-sub">Caption, 4 columns, 4 rows</span>
+                        </div>
+                        <span class="points-tag">5 pts</span>
+                    </button>
+
+                    <button class="nav-item-btn" onclick="loadSolution('../section-1/q4_accordion.html', 'section-1/q4_accordion.html', 'Section I &bull; Question 4', 'Pure CSS Accessible 3-Section Accordion', '10 Pts', this)">
+                        <div class="nav-item-info">
+                            <span class="nav-item-title">Q4: 3-Section Accordion</span>
+                            <span class="nav-item-sub">CSS toggling, mutual exclusion</span>
+                        </div>
+                        <span class="points-tag">10 pts</span>
+                    </button>
+
+                    <button class="nav-item-btn" onclick="loadSolution('../section-1/q5_tabs.html', 'section-1/q5_tabs.html', 'Section I &bull; Question 5', 'Pure CSS Accessible 3-Tab Interface', '10 Pts', this)">
+                        <div class="nav-item-info">
+                            <span class="nav-item-title">Q5: Tab Interface</span>
+                            <span class="nav-item-sub">3 tabs, corresponding content toggle</span>
+                        </div>
+                        <span class="points-tag">10 pts</span>
+                    </button>
+
+                    <button class="nav-item-btn" onclick="loadSolution('../section-1/q6_debug_spacing.html', 'section-1/q6_debug_spacing.html', 'Section I &bull; Question 6', 'Nested List Spacing Remediation', '5 Pts', this)">
+                        <div class="nav-item-info">
+                            <span class="nav-item-title">Q6: Debug List Spacing</span>
+                            <span class="nav-item-sub">Removed p &amp; ul default margins</span>
+                        </div>
+                        <span class="points-tag">5 pts</span>
+                    </button>
+
+                    <button class="nav-item-btn" onclick="loadSolution('../section-1/q7_nested_list.html', 'section-1/q7_nested_list.html', 'Section I &bull; Question 7', 'Multi-Level Nested List Hierarchy', '5 Pts', this)">
+                        <div class="nav-item-info">
+                            <span class="nav-item-title">Q7: Multi-Level List</span>
+                            <span class="nav-item-sub">Red disc, circle, and square bullets</span>
+                        </div>
+                        <span class="points-tag">5 pts</span>
+                    </button>
+
+                    <button class="nav-item-btn" onclick="loadSolution('../section-1/q8_code_formatting.html', 'section-1/q8_code_formatting.html', 'Section I &bull; Question 8', 'Monospace Preformatted Block', '5 Pts', this)">
+                        <div class="nav-item-info">
+                            <span class="nav-item-title">Q8: Preformatted Block</span>
+                            <span class="nav-item-sub">Grey rounded box, pre code tags</span>
+                        </div>
+                        <span class="points-tag">5 pts</span>
+                    </button>
+
+                    <button class="nav-item-btn" onclick="loadSolution('../section-1/q9_apple_layout.html', 'section-1/q9_apple_layout.html', 'Section I &bull; Question 9', 'Tableless Media Object Layout', '5 Pts', this)">
+                        <div class="nav-item-info">
+                            <span class="nav-item-title">Q9: Apple Media Layout</span>
+                            <span class="nav-item-sub">Side-by-side flexbox, no tables</span>
+                        </div>
+                        <span class="points-tag">5 pts</span>
+                    </button>
+
+                    <button class="nav-item-btn" onclick="loadSolution('../section-1/q10_shadow_box.html', 'section-1/q10_shadow_box.html', 'Section I &bull; Question 10', 'CSS Drop-Shadow Container Without Tables', '10 Pts', this)">
+                        <div class="nav-item-info">
+                            <span class="nav-item-title">Q10: Shadow Structure</span>
+                            <span class="nav-item-sub">CSS box-shadow, rounded corners</span>
+                        </div>
+                        <span class="points-tag">10 pts</span>
+                    </button>
+                </div>
+
+                <!-- Section II -->
+                <div class="section-group">
+                    <div class="section-label">
+                        <span>Section II: MCQs</span>
+                        <span>10 Pts</span>
+                    </div>
+
+                    <button class="nav-item-btn" onclick="loadSolution('../section-2/mcqs.html', 'section-2/mcqs.html', 'Section II &bull; MCQs', 'Multiple Choice Questions Evaluation (10 Questions)', '10 Pts', this)">
+                        <div class="nav-item-info">
+                            <span class="nav-item-title">MCQ Assessment Portal</span>
+                            <span class="nav-item-sub">10 questions with rationale &amp; answers</span>
+                        </div>
+                        <span class="points-tag">10 pts</span>
+                    </button>
+                </div>
+
+                <!-- Section III -->
+                <div class="section-group">
+                    <div class="section-label">
+                        <span>Section III: Free Form Coding</span>
+                        <span>20 Pts</span>
+                    </div>
+
+                    <button class="nav-item-btn" onclick="loadSolution('../section-3/q1_features_page.html', 'section-3/q1_features_page.html', 'Section III &bull; Question 1', 'Features Webpage with Lists and Header Separation', '10 Pts', this)">
+                        <div class="nav-item-info">
+                            <span class="nav-item-title">Q1: Features Webpage</span>
+                            <span class="nav-item-sub">Heading, lists, custom bg &amp; header divider</span>
+                        </div>
+                        <span class="points-tag">10 pts</span>
+                    </button>
+
+                    <button class="nav-item-btn" onclick="loadSolution('../section-3/q2_ten_html_tags.html', 'section-3/q2_ten_html_tags.html', 'Section III &bull; Question 2', 'Semantic HTML5 Tags with How &amp; Where Guides', '10 Pts', this)">
+                        <div class="nav-item-info">
+                            <span class="nav-item-title">Q2: 16+ Semantic Tags</span>
+                            <span class="nav-item-sub">Comprehensive how &amp; where usage guides</span>
+                        </div>
+                        <span class="points-tag">10 pts</span>
+                    </button>
+                </div>
+
+            </div>
+        </nav>
+
+        <!-- Main Workspace Viewport -->
+        <main class="workspace" role="main">
+            <!-- Context Header Bar -->
+            <div class="context-bar">
+                <div class="context-meta">
+                    <h3 id="current-title">Section I &bull; Question 1: Accessible Edutech Welcome Webpage</h3>
+                    <p id="current-desc">Live output preview of candidate solution for Accessible Edutech Welcome Webpage</p>
+                </div>
+                <div class="context-actions">
+                    <span class="candidate-chip" id="current-points">10 Points</span>
+                </div>
+            </div>
+
+            <!-- Iframe Shell & Code Viewer -->
+            <div class="iframe-container-wrap">
+                <div class="preview-frame-shell" id="frame-shell">
+                    <!-- Live Iframe Output -->
+                    <iframe id="preview-frame" src="../section-1/q1_welcome_edutech.html" title="Solution Live Preview"></iframe>
+                    
+                    <!-- Built-in Source Code Viewer -->
+                    <div class="code-viewer-container" id="code-viewer">
+                        <button class="copy-btn" id="copy-btn" onclick="copyCode()">Copy Code</button>
+                        <pre><code id="code-content">Loading source code...</code></pre>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        const GITHUB_REPO_BASE = "https://github.com/rohit2215/LMS-Assignment/blob/main/";
+        let currentFileRelPath = "section-1/q1_welcome_edutech.html";
+        let currentUrl = "../section-1/q1_welcome_edutech.html";
+        let currentViewMode = "ui"; // 'ui' or 'code'
+
+        function loadSolution(url, relPath, sectionTag, title, points, btn) {
+            currentUrl = url;
+            currentFileRelPath = relPath;
+
+            // Update iframe
+            const iframe = document.getElementById('preview-frame');
+            iframe.src = url;
+
+            // Update header info
+            document.getElementById('current-title').textContent = sectionTag + ': ' + title;
+            document.getElementById('current-desc').textContent = 'Viewing solution for ' + title;
+            document.getElementById('current-points').textContent = points;
+            document.getElementById('btn-open-new-tab').href = url;
+            document.getElementById('btn-github-code').href = GITHUB_REPO_BASE + relPath;
+
+            // Update active state in sidebar
+            document.querySelectorAll('.nav-item-btn').forEach(b => b.classList.remove('active'));
+            if (btn) {
+                btn.classList.add('active');
+            }
+
+            // If currently in code mode, fetch and display source code
+            if (currentViewMode === 'code') {
+                fetchSourceCode(url);
+            }
+        }
+
+        function setViewMode(mode) {
+            currentViewMode = mode;
+            const btnUi = document.getElementById('mode-ui');
+            const btnCode = document.getElementById('mode-code');
+            const iframe = document.getElementById('preview-frame');
+            const codeViewer = document.getElementById('code-viewer');
+            const deviceControls = document.getElementById('device-controls');
+
+            if (mode === 'code') {
+                btnUi.classList.remove('active');
+                btnCode.classList.add('active');
+                iframe.style.display = 'none';
+                codeViewer.style.display = 'block';
+                deviceControls.style.opacity = '0.4';
+                deviceControls.style.pointerEvents = 'none';
+                fetchSourceCode(currentUrl);
+            } else {
+                btnCode.classList.remove('active');
+                btnUi.classList.add('active');
+                codeViewer.style.display = 'none';
+                iframe.style.display = 'block';
+                deviceControls.style.opacity = '1';
+                deviceControls.style.pointerEvents = 'auto';
+            }
+        }
+
+        function fetchSourceCode(url) {
+            const codeContent = document.getElementById('code-content');
+            codeContent.textContent = 'Loading source code for ' + currentFileRelPath + '...';
+
+            fetch(url)
+                .then(res => {
+                    if (!res.ok) throw new Error('Status ' + res.status);
+                    return res.text();
+                })
+                .then(text => {
+                    codeContent.textContent = text;
+                })
+                .catch(err => {
+                    codeContent.textContent = '<!-- Source file located at: ' + currentFileRelPath + ' -->\n' +
+                        'View directly on GitHub: ' + GITHUB_REPO_BASE + currentFileRelPath + '\n\n' +
+                        '(Note: Local file:// origin security policies may restrict direct text fetch. Use the "GitHub Source" button in the top bar to inspect source code on GitHub).';
+                });
+        }
+
+        function copyCode() {
+            const text = document.getElementById('code-content').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                const btn = document.getElementById('copy-btn');
+                btn.textContent = 'Copied!';
+                setTimeout(() => { btn.textContent = 'Copy Code'; }, 2000);
+            });
+        }
+
+        function setDevice(device) {
+            const shell = document.getElementById('frame-shell');
+            const btnDesktop = document.getElementById('btn-desktop');
+            const btnTablet = document.getElementById('btn-tablet');
+            const btnMobile = document.getElementById('btn-mobile');
+
+            btnDesktop.classList.remove('active');
+            btnTablet.classList.remove('active');
+            btnMobile.classList.remove('active');
+
+            shell.classList.remove('tablet', 'mobile');
+
+            if (device === 'tablet') {
+                shell.classList.add('tablet');
+                btnTablet.classList.add('active');
+            } else if (device === 'mobile') {
+                shell.classList.add('mobile');
+                btnMobile.classList.add('active');
+            } else {
+                btnDesktop.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

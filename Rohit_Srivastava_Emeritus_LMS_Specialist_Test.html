@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rohit Srivastava - Emeritus LMS Specialist Test Submission</title>
+    <style>
+        :root {
+            --emeritus-green: #00875a;
+            --emeritus-green-hover: #006c48;
+            --emeritus-green-light: #e6f4ea;
+            --dark-heading: #111827;
+            --body-text: #374151;
+            --muted-text: #6b7280;
+            --border-light: #e5e7eb;
+            --bg-white: #ffffff;
+            --bg-canvas: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--body-text);
+            background-color: var(--bg-canvas);
+            line-height: 1.6;
+            padding-bottom: 5rem;
+        }
+
+        /* Top Announcement Strip */
+        .top-strip {
+            width: 100%;
+            background-color: var(--emeritus-green);
+            color: #ffffff;
+            text-align: center;
+            padding: 0.65rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Header */
+        .site-header {
+            background-color: var(--bg-white);
+            border-bottom: 1px solid var(--border-light);
+            padding: 1.5rem 3rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        .brand-area {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--dark-heading);
+        }
+
+        .brand-badge {
+            width: 36px;
+            height: 36px;
+            border: 2.5px solid var(--emeritus-green);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.35rem;
+            color: var(--emeritus-green);
+        }
+
+        .brand-title-group h1 {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--dark-heading);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 3.5rem;
+        }
+
+        /* Candidate Details Card */
+        .candidate-card {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2rem;
+        }
+
+        .candidate-meta h4 {
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--muted-text);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.35rem;
+        }
+
+        .candidate-meta p {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--dark-heading);
+        }
+
+        /* Section Banner */
+        .section-header-banner {
+            background-color: var(--dark-heading);
+            color: #ffffff;
+            padding: 1.75rem 2rem;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .section-header-banner h2 {
+            font-size: 1.45rem;
+            font-weight: 800;
+        }
+
+        .section-header-banner span {
+            background-color: var(--emeritus-green);
+            color: #ffffff;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 0.35rem 0.85rem;
+            border-radius: 6px;
+        }
+
+        /* Question Wrapper */
+        .question-box {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .question-title-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--emeritus-green-light);
+            padding-bottom: 1rem;
+        }
+
+        .question-title-bar h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--dark-heading);
+        }
+
+        .question-points {
+            background-color: var(--emeritus-green-light);
+            color: var(--emeritus-green);
+            font-weight: 800;
+            font-size: 0.85rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+        }
+
+        .preview-frame {
+            width: 100%;
+            height: 480px;
+            border: 1px solid var(--border-light);
+            border-radius: 8px;
+            background-color: #ffffff;
+        }
+
+        .link-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+        }
+
+        .btn-view {
+            color: var(--emeritus-green);
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.95rem;
+        }
+
+        .btn-view:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            .site-header {
+                padding: 1rem 1.5rem;
+            }
+            .container {
+                padding: 0 1rem;
+            }
+            .question-box {
+                padding: 1.5rem 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <aside class="top-strip" aria-label="Global Banner">
+        Emeritus LMS Specialist Test &bull; Official Submission Document
+    </aside>
+
+    <header class="site-header">
+        <div class="brand-area">
+            <div class="brand-badge" aria-hidden="true">E</div>
+            <div class="brand-title-group">
+                <h1>Emeritus LMS Specialist Test</h1>
+            </div>
+        </div>
+        <div>
+            <span style="font-weight: 700; color: var(--emeritus-green); background: var(--emeritus-green-light); padding: 0.35rem 0.85rem; border-radius: 20px;">
+                Total Score: 100 Points
+            </span>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Candidate Overview Information (Page 3 of PDF Specification) -->
+        <section class="candidate-card" aria-label="Candidate Credentials">
+            <div class="candidate-meta">
+                <h4>Candidate Name</h4>
+                <p>Rohit Srivastava</p>
+            </div>
+            <div class="candidate-meta">
+                <h4>Position</h4>
+                <p>LMS Specialist</p>
+            </div>
+            <div class="candidate-meta">
+                <h4>Repository</h4>
+                <p><a href="https://github.com/rohit2215/LMS-Assignment" target="_blank" style="color: var(--emeritus-green); text-decoration: none;">rohit2215/LMS-Assignment</a></p>
+            </div>
+            <div class="candidate-meta">
+                <h4>Submission Status</h4>
+                <p style="color: #00875a;">All Sections Complete (100%)</p>
+            </div>
+        </section>
+
+        <!-- ==================== SECTION I ==================== -->
+        <div class="section-header-banner">
+            <h2>Section I: Basic HTML &amp; CSS Coding</h2>
+            <span>70 Points</span>
+        </div>
+
+        <!-- Q1 -->
+        <article class="question-box">
+            <div class="question-title-bar">
+                <h3>Question 1: Accessible Edutech Welcome Webpage</h3>
+                <span class="question-points">10 Points</span>
+            </div>
+            <p><strong>Requirement:</strong> Heading "Welcome to edutech", paragraph explaining edutech, list explaining benefits.</p>
+            <iframe class="preview-frame" src="section-1/q1_welcome_edutech.html" title="Q1 Preview"></iframe>
+            <div class="link-actions">
+                <a href="section-1/q1_welcome_edutech.html" target="_blank" class="btn-view">Open Dedicated Page &rarr;</a>
+            </div>
+        </article>
+
+        <!-- Q2 -->
+        <article class="question-box">
+            <div class="question-title-bar">
+                <h3>Question 2: Link with Hover Tooltip in New Tab</h3>
+                <span class="question-points">5 Points</span>
+            </div>
+            <p><strong>Requirement:</strong> Link "Check OpenAI" to https://openai.com/ in new tab with tooltip displaying "Visit OpenAI website".</p>
+            <iframe class="preview-frame" style="height: 380px;" src="section-1/q2_link_tooltip.html" title="Q2 Preview"></iframe>
+            <div class="link-actions">
+                <a href="section-1/q2_link_tooltip.html" target="_blank" class="btn-view">Open Dedicated Page &rarr;</a>
+            </div>
+        </article>
+
+        <!-- Q3 -->
+        <article class="question-box">
+            <div class="question-title-bar">
+                <h3>Question 3: Accessible Faculty Details Table</h3>
+                <span class="question-points">5 Points</span>
+            </div>
+            <p><strong>Requirement:</strong> Caption "Faculty details", 4 columns (Name, Photo, Designation, Other Details), 4 populated rows.</p>
+            <iframe class="preview-frame" style="height: 480px;" src="section-1/q3_faculty_table.html" title="Q3 Preview"></iframe>
+            <div class="link-actions">
+                <a href="section-1/q3_faculty_table.html" target="_blank" class="btn-view">Open Dedicated Page &rarr;</a>
+            </div>
+        </article>
+
+        <!-- Q4 -->
+        <article class="question-box">
+            <div class="question-title-bar">
+                <h3>Question 4: Accessible 3-Section CSS Accordion</h3>
+                <span class="question-points">10 Points</span>
+            </div>
+            <p><strong>Requirement:</strong> 3 sections with CSS toggling where each section reveals content and hides the others, with expand/collapse on repeat click.</p>
+            <iframe class="preview-frame" style="height: 480px;" src="section-1/q4_accordion.html" title="Q4 Preview"></iframe>
+            <div class="link-actions">
+                <a href="section-1/q4_accordion.html" target="_blank" class="btn-view">Open Dedicated Page &rarr;</a>
+            </div>
+        </article>
+
+        <!-- Q5 -->
+        <article class="question-box">
+            <div class="question-title-bar">
+                <h3>Question 5: Accessible 3-Tab Interface</h3>
+                <span class="question-points">10 Points</span>
+            </div>
+            <p><strong>Requirement:</strong> Tab interface with three tabs displaying corresponding content and hiding the others via CSS.</p>
+            <iframe class="preview-frame" style="height: 480px;" src="section-1/q5_tabs.html" title="Q5 Preview"></iframe>
+            <div class="link-actions">
+                <a href="section-1/q5_tabs.html" target="_blank" class="btn-view">Open Dedicated Page &rarr;</a>
+            </div>
+        </article>
+
+        <!-- Q6 -->
+        <article class="question-box">
+            <div class="question-title-bar">
+                <h3>Question 6: Debug Nested List Spacing</h3>
+                <span class="question-points">5 Points</span>
+            </div>
+            <p><strong>Requirement:</strong> Remove highlighted extra vertical gaps between nested lists and paragraph.</p>
+            <iframe class="preview-frame" style="height: 480px;" src="section-1/q6_debug_spacing.html" title="Q6 Preview"></iframe>
+            <div class="link-actions">
+                <a href="section-1/q6_debug_spacing.html" target="_blank" class="btn-view">Open Dedicated Page &rarr;</a>
+            </div>
+        </article>
+
+        <!-- Q7 -->
+        <article class="question-box">
+            <div class="question-title-bar">
+                <h3>Question 7: Multi-Level Nested List Hierarchy</h3>
+                <span class="question-points">5 Points</span>
+            </div>
+            <p><strong>Requirement:</strong> Level 1 in red with disc bullets, Level 2 circle bullet, Level 3 square bullets.</p>
+            <iframe class="preview-frame" style="height: 440px;" src="section-1/q7_nested_list.html" title="Q7 Preview"></iframe>
+            <div class="link-actions">
+                <a href="section-1/q7_nested_list.html" target="_blank" class="btn-view">Open Dedicated Page &rarr;</a>
+            </div>
+        </article>
+
+        <!-- Q8 -->
+        <article class="question-box">
+            <div class="question-title-bar">
+                <h3>Question 8: Monospace Preformatted Text Block</h3>
+                <span class="question-points">5 Points</span>
+            </div>
+            <p><strong>Requirement:</strong> Replicate grey rounded box formatting containing preserved multi-line monospace text.</p>
+            <iframe class="preview-frame" style="height: 380px;" src="section-1/q8_code_formatting.html" title="Q8 Preview"></iframe>
+            <div class="link-actions">
+                <a href="section-1/q8_code_formatting.html" target="_blank" class="btn-view">Open Dedicated Page &rarr;</a>
+            </div>
+        </article>
+
+        <!-- Q9 -->
+        <article class="question-box">
+            <div class="question-title-bar">
+                <h3>Question 9: Tableless Media Object Layout</h3>
+                <span class="question-points">5 Points</span>
+            </div>
+            <p><strong>Requirement:</strong> Side-by-side apple photo and description layout without using an HTML table.</p>
+            <iframe class="preview-frame" style="height: 440px;" src="section-1/q9_apple_layout.html" title="Q9 Preview"></iframe>
+            <div class="link-actions">
+                <a href="section-1/q9_apple_layout.html" target="_blank" class="btn-view">Open Dedicated Page &rarr;</a>
+            </div>
+        </article>
+
+        <!-- Q10 -->
+        <article class="question-box">
+            <div class="question-title-bar">
+                <h3>Question 10: Tableless Drop-Shadow Container</h3>
+                <span class="question-points">10 Points</span>
+            </div>
+            <p><strong>Requirement:</strong> Shadow structure with rounded corners and text lines without using a table.</p>
+            <iframe class="preview-frame" style="height: 380px;" src="section-1/q10_shadow_box.html" title="Q10 Preview"></iframe>
+            <div class="link-actions">
+                <a href="section-1/q10_shadow_box.html" target="_blank" class="btn-view">Open Dedicated Page &rarr;</a>
+            </div>
+        </article>
+
+
+        <!-- ==================== SECTION II ==================== -->
+        <div class="section-header-banner">
+            <h2>Section II: Multiple Choice Questions (MCQs)</h2>
+            <span>10 Points</span>
+        </div>
+
+        <article class="question-box">
+            <div class="question-title-bar">
+                <h3>10 MCQs with Technical Explanations</h3>
+                <span class="question-points">10 Points</span>
+            </div>
+            <p><strong>Requirement:</strong> Assess theoretical knowledge of core HTML and CSS fundamentals.</p>
+            <iframe class="preview-frame" style="height: 600px;" src="section-2/mcqs.html" title="Section 2 MCQs Preview"></iframe>
+            <div class="link-actions">
+                <a href="section-2/mcqs.html" target="_blank" class="btn-view">Open Dedicated Page &rarr;</a>
+            </div>
+        </article>
+
+
+        <!-- ==================== SECTION III ==================== -->
+        <div class="section-header-banner">
+            <h2>Section III: Free Form Coding</h2>
+            <span>20 Points</span>
+        </div>
+
+        <!-- Section 3 Q1 -->
+        <article class="question-box">
+            <div class="question-title-bar">
+                <h3>Question 1: Features Webpage with Header Separation</h3>
+                <span class="question-points">10 Points</span>
+            </div>
+            <p><strong>Requirement:</strong> Heading "Welcome to My Website", subheading "Explore the Features", unordered list, ordered list, background color, paragraph with bullet points.</p>
+            <iframe class="preview-frame" style="height: 520px;" src="section-3/q1_features_page.html" title="Section 3 Q1 Preview"></iframe>
+            <div class="link-actions">
+                <a href="section-3/q1_features_page.html" target="_blank" class="btn-view">Open Dedicated Page &rarr;</a>
+            </div>
+        </article>
+
+        <!-- Section 3 Q2 -->
+        <article class="question-box">
+            <div class="question-title-bar">
+                <h3>Question 2: Demonstration of 16+ Semantic HTML Tags</h3>
+                <span class="question-points">10 Points</span>
+            </div>
+            <p><strong>Requirement:</strong> Demonstrate at least 10 HTML tags with in-depth "How and Where" usage guides.</p>
+            <iframe class="preview-frame" style="height: 560px;" src="section-3/q2_ten_html_tags.html" title="Section 3 Q2 Preview"></iframe>
+            <div class="link-actions">
+                <a href="section-3/q2_ten_html_tags.html" target="_blank" class="btn-view">Open Dedicated Page &rarr;</a>
+            </div>
+        </article>
+
+    </main>
+
+    <footer style="text-align: center; padding: 3rem 1rem; color: var(--muted-text); font-size: 0.9rem; border-top: 1px solid var(--border-light); background: #ffffff;">
+        <p>&copy; 2026 Emeritus LMS Specialist Assessment &bull; Submission by Rohit Srivastava</p>
+    </footer>
+</body>
+</html>
