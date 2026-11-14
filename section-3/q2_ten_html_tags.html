@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demonstration of Core HTML Tags | Emeritus</title>
+    <style>
+        :root {
+            --emeritus-green: #00875a;
+            --emeritus-green-hover: #006c48;
+            --emeritus-green-light: #e6f4ea;
+            --dark-heading: #111827;
+            --body-text: #374151;
+            --muted-text: #6b7280;
+            --border-light: #e5e7eb;
+            --bg-white: #ffffff;
+            --bg-canvas: #f8fafc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--body-text);
+            background-color: var(--bg-canvas);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Announcement Strip */
+        .top-strip {
+            width: 100%;
+            background-color: var(--emeritus-green);
+            color: #ffffff;
+            text-align: center;
+            padding: 0.65rem 1.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Full Width Header */
+        .site-nav {
+            width: 100%;
+            background-color: var(--bg-white);
+            border-bottom: 1px solid var(--border-light);
+            padding: 1.1rem 3rem;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+        }
+
+        .nav-wrapper {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand-area {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            text-decoration: none;
+            color: var(--dark-heading);
+        }
+
+        .brand-badge {
+            width: 36px;
+            height: 36px;
+            border: 2.5px solid var(--emeritus-green);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.35rem;
+            color: var(--emeritus-green);
+        }
+
+        .brand-name {
+            font-size: 1.45rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--dark-heading);
+        }
+
+        .nav-tag {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--muted-text);
+        }
+
+        /* Main Content Container */
+        .page-content {
+            flex: 1;
+            width: 100%;
+            padding: 4rem 3rem;
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .intro-header {
+            max-width: 850px;
+        }
+
+        .intro-header h1 {
+            font-size: clamp(2rem, 3.5vw, 2.75rem);
+            font-weight: 800;
+            color: var(--dark-heading);
+            letter-spacing: -0.02em;
+            margin-bottom: 0.75rem;
+        }
+
+        .intro-header p {
+            font-size: 1.15rem;
+            color: var(--muted-text);
+        }
+
+        /* Tag Annotation Pills */
+        .tag-pill {
+            display: inline-block;
+            background-color: #0f172a;
+            color: #38bdf8;
+            font-family: ui-monospace, monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 0.25rem 0.65rem;
+            border-radius: 4px;
+            margin-right: 0.4rem;
+            margin-bottom: 0.4rem;
+        }
+
+        /* Showcase Cards */
+        .demo-card {
+            background-color: var(--bg-white);
+            border: 1px solid var(--border-light);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            gap: 2.25rem;
+        }
+
+        .demo-section {
+            border-bottom: 1px solid var(--border-light);
+            padding-bottom: 2.25rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .demo-section:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.35rem;
+            font-weight: 700;
+            color: var(--dark-heading);
+        }
+
+        /* Technical Explanation Box */
+        .explanation-guide {
+            background-color: #f8fafc;
+            border-left: 4px solid var(--emeritus-green);
+            border-radius: 0 8px 8px 0;
+            padding: 1.25rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .guide-item {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: var(--body-text);
+        }
+
+        .guide-item strong {
+            color: var(--dark-heading);
+        }
+
+        .guide-item code {
+            background-color: #e2e8f0;
+            color: #0f172a;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+
+        .guide-badge {
+            display: inline-block;
+            background-color: var(--emeritus-green-light);
+            color: var(--emeritus-green);
+            font-weight: 700;
+            font-size: 0.75rem;
+            padding: 0.15rem 0.45rem;
+            border-radius: 4px;
+            margin-right: 0.35rem;
+            text-transform: uppercase;
+        }
+
+        blockquote {
+            border-left: 4px solid var(--emeritus-green);
+            padding: 0.85rem 1.25rem;
+            background-color: var(--emeritus-green-light);
+            border-radius: 0 8px 8px 0;
+            font-style: italic;
+            color: var(--dark-heading);
+            font-size: 1.05rem;
+        }
+
+        .demo-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.95rem;
+        }
+
+        .demo-table th, .demo-table td {
+            border: 1px solid var(--border-light);
+            padding: 0.75rem 1rem;
+            text-align: left;
+        }
+
+        .demo-table th {
+            background-color: #f8fafc;
+            font-weight: 700;
+        }
+
+        .demo-form {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .demo-form input {
+            padding: 0.6rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .demo-form input:focus {
+            border-color: var(--emeritus-green);
+        }
+
+        .demo-form button {
+            background-color: var(--emeritus-green);
+            color: #ffffff;
+            font-weight: 700;
+            padding: 0.6rem 1.25rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .demo-form button:hover {
+            background-color: var(--emeritus-green-hover);
+        }
+
+        /* Global Footer */
+        .site-footer {
+            width: 100%;
+            background-color: var(--dark-heading);
+            color: #9ca3af;
+            padding: 2rem 3rem;
+            margin-top: auto;
+            border-top: 1px solid var(--border-light);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 860px) {
+            .site-nav, .page-content, .site-footer {
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Announcement Strip -->
+    <aside class="top-strip" aria-label="Global Banner">
+        Emeritus Technical Assessment &bull; Semantic HTML Tag Demonstration
+    </aside>
+
+    <!-- Tag 1: <header> & Tag 2: <nav> -->
+    <header class="site-nav" role="banner">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-area" aria-label="Emeritus Home">
+                <div class="brand-badge" aria-hidden="true">E</div>
+                <span class="brand-name">Emeritus</span>
+            </a>
+            <nav aria-label="Breadcrumb" class="nav-tag">
+                <span class="tag-pill">&lt;header&gt;</span>
+                <span class="tag-pill">&lt;nav&gt;</span>
+                <span>Semantic HTML5 Demonstration</span>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Tag 3: <main> -->
+    <main class="page-content" role="main">
+        
+        <div class="intro-header">
+            <!-- Tag 4: <h1> -->
+            <h1>Semantic Demonstration of HTML Tags</h1>
+            <!-- Tag 5: <p> -->
+            <p>
+                Each section below demonstrates live implementations of standardized HTML tags, explaining <strong>how</strong> each tag functions and <strong>where</strong> it is utilized in modern web development and LMS platforms.
+            </p>
+        </div>
+
+        <!-- Tag 6: <article> -->
+        <article class="demo-card">
+            
+            <!-- Group 1: Page Layout & Landmarks (<header>, <nav>, <main>, <footer>) -->
+            <section class="demo-section">
+                <div>
+                    <span class="tag-pill">&lt;header&gt;</span>
+                    <span class="tag-pill">&lt;nav&gt;</span>
+                    <span class="tag-pill">&lt;main&gt;</span>
+                    <span class="tag-pill">&lt;footer&gt;</span>
+                </div>
+                <h2 class="section-title">1. Document Landmarks &amp; Structural Architecture</h2>
+                <p>
+                    Landmark tags define the macro-layout of an accessible webpage, allowing screen readers and search engines to understand the page structure instantly.
+                </p>
+
+                <div class="explanation-guide">
+                    <div class="guide-item">
+                        <span class="guide-badge">How Used</span>
+                        <code>&lt;header&gt;</code> contains introductory branding or navigation; <code>&lt;nav&gt;</code> wraps major navigational link collections; <code>&lt;main&gt;</code> encapsulates the singular core content of the document; and <code>&lt;footer&gt;</code> houses copyright, metadata, and support links.
+                    </div>
+                    <div class="guide-item">
+                        <span class="guide-badge">Where Used</span>
+                        Every standardized LMS course template, site navigation bar, course syllabus header, and university institutional portal.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Group 2: Sectioning & Articles (<article>, <section>, <h2>, <h3>) -->
+            <section class="demo-section">
+                <div>
+                    <span class="tag-pill">&lt;article&gt;</span>
+                    <span class="tag-pill">&lt;section&gt;</span>
+                    <span class="tag-pill">&lt;h2&gt;</span>
+                    <span class="tag-pill">&lt;h3&gt;</span>
+                </div>
+                <h2 class="section-title">2. Content Sectioning &amp; Heading Hierarchy</h2>
+                <p>
+                    Divides long-form educational material into digestible, standalone thematic units with an accessible heading outline.
+                </p>
+
+                <div class="explanation-guide">
+                    <div class="guide-item">
+                        <span class="guide-badge">How Used</span>
+                        <code>&lt;article&gt;</code> encapsulates self-contained, syndicatable content (such as this card); <code>&lt;section&gt;</code> groups related elements under a heading; <code>&lt;h2&gt;</code> and <code>&lt;h3&gt;</code> establish sub-heading hierarchy for assistive screen readers.
+                    </div>
+                    <div class="guide-item">
+                        <span class="guide-badge">Where Used</span>
+                        LMS course modules, discussion forum threads, student assignment cards, and blog articles.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Group 3: Text Semantics (<mark>, <strong>, <em>) -->
+            <section class="demo-section">
+                <div>
+                    <span class="tag-pill">&lt;mark&gt;</span>
+                    <span class="tag-pill">&lt;strong&gt;</span>
+                    <span class="tag-pill">&lt;em&gt;</span>
+                </div>
+                <h2 class="section-title">3. Text Formatting &amp; Inline Semantics</h2>
+                <p>
+                    Live Demonstration: In educational coursework, we use <mark style="background-color: #fef08a; padding: 0.15rem 0.4rem; border-radius: 3px;">&lt;mark&gt; to highlight key revision terms</mark>, <strong>&lt;strong&gt; to signal crucial deadlines or warnings</strong>, and <em>&lt;em&gt; to add emphatic vocal stress</em>.
+                </p>
+
+                <div class="explanation-guide">
+                    <div class="guide-item">
+                        <span class="guide-badge">How Used</span>
+                        <code>&lt;mark&gt;</code> applies contextual yellow highlighting; <code>&lt;strong&gt;</code> conveys high importance (screen readers adjust vocal tone); <code>&lt;em&gt;</code> alters verbal inflection for stressed emphasis.
+                    </div>
+                    <div class="guide-item">
+                        <span class="guide-badge">Where Used</span>
+                        Reading comprehension modules, assignment submission deadlines, vocabulary lists, and quiz feedback notes.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Group 4: Quotations & Citations (<blockquote>, <cite>) -->
+            <section class="demo-section">
+                <div>
+                    <span class="tag-pill">&lt;blockquote&gt;</span>
+                    <span class="tag-pill">&lt;cite&gt;</span>
+                </div>
+                <h2 class="section-title">4. Academic Citations &amp; Extended Quotations</h2>
+                <blockquote>
+                    "Education is the most powerful weapon which you can use to change the world."
+                    <footer style="margin-top: 0.45rem; font-size: 0.9rem; color: #475569;">
+                        &mdash; <cite>Nelson Mandela (Long Walk to Freedom)</cite>
+                    </footer>
+                </blockquote>
+
+                <div class="explanation-guide">
+                    <div class="guide-item">
+                        <span class="guide-badge">How Used</span>
+                        <code>&lt;blockquote&gt;</code> creates an indented block for quotations from external literature; <code>&lt;cite&gt;</code> attributes the author, paper, or publication title.
+                    </div>
+                    <div class="guide-item">
+                        <span class="guide-badge">Where Used</span>
+                        Academic course readings, case studies, professor quotes, research bibliography references, and scholarly publications.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Group 5: Lists (<ul>, <ol>, <li>) -->
+            <section class="demo-section">
+                <div>
+                    <span class="tag-pill">&lt;ul&gt;</span>
+                    <span class="tag-pill">&lt;ol&gt;</span>
+                    <span class="tag-pill">&lt;li&gt;</span>
+                </div>
+                <h2 class="section-title">5. Sequential &amp; Non-Sequential Lists</h2>
+                <ul style="padding-left: 1.5rem;">
+                    <li>Unordered bullet point (<code>&lt;ul&gt; &bull; &lt;li&gt;</code>)</li>
+                    <li>Unordered bullet point (<code>&lt;ul&gt; &bull; &lt;li&gt;</code>)</li>
+                </ul>
+
+                <div class="explanation-guide">
+                    <div class="guide-item">
+                        <span class="guide-badge">How Used</span>
+                        <code>&lt;ul&gt;</code> with <code>&lt;li&gt;</code> renders bulleted items where order does not matter; <code>&lt;ol&gt;</code> renders numbered items where sequential order is essential.
+                    </div>
+                    <div class="guide-item">
+                        <span class="guide-badge">Where Used</span>
+                        Course prerequisites, syllabus breakdowns, step-by-step tutorial instructions, and resource bibliographies.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Group 6: Tabular Data (<table>, <caption>, <th>, <td>) -->
+            <section class="demo-section">
+                <div>
+                    <span class="tag-pill">&lt;table&gt;</span>
+                    <span class="tag-pill">&lt;caption&gt;</span>
+                    <span class="tag-pill">&lt;th&gt;</span>
+                    <span class="tag-pill">&lt;td&gt;</span>
+                </div>
+                <h2 class="section-title">6. Tabular Data Representation</h2>
+                <table class="demo-table">
+                    <caption style="text-align: left; font-weight: 700; margin-bottom: 0.5rem; color: var(--dark-heading);">
+                        LMS Grading Rubric Matrix
+                    </caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">Assessment Category</th>
+                            <th scope="col">Weightage</th>
+                            <th scope="col">Passing Threshold</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Module Quizzes</td>
+                            <td>30%</td>
+                            <td>80% or Higher</td>
+                        </tr>
+                        <tr>
+                            <td>Capstone Assignment</td>
+                            <td>70%</td>
+                            <td>75% or Higher</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="explanation-guide">
+                    <div class="guide-item">
+                        <span class="guide-badge">How Used</span>
+                        <code>&lt;table&gt;</code> organizes rows (<code>&lt;tr&gt;</code>) and columns; <code>&lt;caption&gt;</code> describes the table's purpose; <code>&lt;th&gt;</code> provides column headers with <code>scope</code>; <code>&lt;td&gt;</code> holds individual data cells.
+                    </div>
+                    <div class="guide-item">
+                        <span class="guide-badge">Where Used</span>
+                        Grading rubrics, timetable schedules, course fee breakdowns, and student performance gradebooks.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Group 7: Interactive Forms (<form>, <input>, <button>) -->
+            <section class="demo-section">
+                <div>
+                    <span class="tag-pill">&lt;form&gt;</span>
+                    <span class="tag-pill">&lt;label&gt;</span>
+                    <span class="tag-pill">&lt;input&gt;</span>
+                    <span class="tag-pill">&lt;button&gt;</span>
+                </div>
+                <h2 class="section-title">7. Interactive Form Submissions</h2>
+                <form class="demo-form" action="#" method="get" onsubmit="event.preventDefault(); alert('Subscribed!');">
+                    <label for="learner-email" style="font-weight: 600;">Course Updates:</label>
+                    <input type="email" id="learner-email" placeholder="learner@emeritus.org" required>
+                    <button type="submit">Subscribe</button>
+                </form>
+
+                <div class="explanation-guide">
+                    <div class="guide-item">
+                        <span class="guide-badge">How Used</span>
+                        <code>&lt;form&gt;</code> captures user data; <code>&lt;label&gt;</code> binds accessible labels to inputs via <code>for="id"</code>; <code>&lt;input&gt;</code> accepts typed values; <code>&lt;button&gt;</code> executes submission.
+                    </div>
+                    <div class="guide-item">
+                        <span class="guide-badge">Where Used</span>
+                        Student course enrollment, quiz submission portals, LMS login screens, and survey feedback forms.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Group 8: Temporal Data (<time>) -->
+            <section class="demo-section">
+                <div>
+                    <span class="tag-pill">&lt;time&gt;</span>
+                </div>
+                <h2 class="section-title">8. Machine-Readable Time &amp; Dates</h2>
+                <p>
+                    Live Demo: Next cohort commences on 
+                    <time datetime="2026-12-01" style="font-weight: 700; color: var(--emeritus-green);">
+                        December 1, 2026
+                    </time>.
+                </p>
+
+                <div class="explanation-guide">
+                    <div class="guide-item">
+                        <span class="guide-badge">How Used</span>
+                        <code>&lt;time&gt;</code> wraps human-readable date/time strings while providing an ISO 8601 machine-readable format via the <code>datetime</code> attribute.
+                    </div>
+                    <div class="guide-item">
+                        <span class="guide-badge">Where Used</span>
+                        Assignment deadlines, calendar reminders, course start dates, and automated grading timestamps in LMS systems.
+                    </div>
+                </div>
+            </section>
+
+        </article>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="site-footer" role="contentinfo">
+        <div class="footer-inner">
+            <p>&copy; 2026 Emeritus Edutech Platform &bull; Submission by Rohit Srivastava</p>
+            <p><span class="tag-pill">&lt;footer&gt;</span> Built with Semantic HTML5</p>
+        </div>
+    </footer>
+</body>
+</html>
